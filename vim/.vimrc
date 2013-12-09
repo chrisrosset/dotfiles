@@ -154,28 +154,13 @@ map <F3> :call TogglePaste()<CR>
 map <F5> "+y<CR>
 map <F6> "+p<CR>
 
+
 " ============================= CUSTOM COMMANDS
 
 cmap w!!! w !sudo tee % > /dev/null
 
 
-" ============================= STATUS LINE
-
-set laststatus=2
-set statusline=
-set statusline+=%7*\[%n]                                  "buffernr
-set statusline+=%1*\ %<%F\                                "File+path
-set statusline+=%2*\ %y\                                  "FileType
-set statusline+=%3*\ %{''.(&fenc!=''?&fenc:&enc).''}      "Encoding
-set statusline+=%3*\ %{(&bomb?\",BOM\":\"\")}\            "Encoding2
-set statusline+=%4*\ %{&ff}\                              "FileFormat (dos/unix..)
-"set statusline+=%5*\ %{&spelllang}\%{HighlightSearch()}\  "Spellanguage & Highlight on?
-set statusline+=%8*\ %=\ row:%l/%L\ (%03p%%)\             "Rownumber/total (%)
-set statusline+=%9*\ col:%03c\                            "Colnr
-set statusline+=%0*\ \ %m%r%w\ %P\ \                      "Modified? Readonly? Top/bot.
-
-
-" ============================= STATUS LINE
+" ============================= PLUGINS
 
 try
     set rtp+=~/.vim/bundle/vundle/
@@ -206,3 +191,21 @@ try
 
 catch /^Vim\%((\a\+)\)\=:E117/
 endtry
+
+
+" ============================= STATUS LINE
+
+if exists(g:custom_status_line) ==? 0
+    set laststatus=2
+    set statusline=
+    set statusline+=%7*\[%n]                                  "buffernr
+    set statusline+=%1*\ %<%F\                                "File+path
+    set statusline+=%2*\ %y\                                  "FileType
+    set statusline+=%3*\ %{''.(&fenc!=''?&fenc:&enc).''}      "Encoding
+    set statusline+=%3*\ %{(&bomb?\",BOM\":\"\")}\            "Encoding2
+    set statusline+=%4*\ %{&ff}\                              "FileFormat (dos/unix..)
+    "set statusline+=%5*\ %{&spelllang}\%{HighlightSearch()}\  "Spellanguage & Highlight on?
+    set statusline+=%8*\ %=\ row:%l/%L\ (%03p%%)\             "Rownumber/total (%)
+    set statusline+=%9*\ col:%03c\                            "Colnr
+    set statusline+=%0*\ \ %m%r%w\ %P\ \                      "Modified? Readonly? Top/bot.
+endif
