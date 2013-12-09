@@ -1,14 +1,12 @@
-" disables vi compatibility mode
-set nocompatible
+" Christopher Rosset
+" .vimrc
 
 " {{{ Visual Settings
-filetype plugin indent on
 
-" syntax highlighting
+set number
+set ttyfast
+
 syntax on
-set modelines=0
-
-set t_Co=256
 
 try
     colorscheme jellybeans
@@ -16,17 +14,35 @@ catch /^Vim\%((\a\+)\)\=:E185/
     colorscheme desert
 endtry
 
+if exists('+colorcolumn')
+    set colorcolumn=+1,+11,+21
+endif
+
 " }}}
 " {{{ General Settings
+
+" disables vi compatibility mode
+set nocompatible
+
+set t_Co=256
+
+if has('persistent_undo')
+    set undofile
+    set undodir=~/.vim/undo
+endif
+
 " tab settings
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set expandtab
 
+" indent settings
+filetype plugin indent on
+set autoindent
+
 set encoding=utf-8
 set scrolloff=5
-set autoindent
 set showmode
 set showcmd
 set hidden
@@ -35,23 +51,16 @@ set listchars=tab:▸\ ,trail:$
 set list
 set wildmode=list:longest
 set visualbell
-set ttyfast
 set ruler
 set backspace=indent,eol,start
 set mouse=a
 
-" enables persistent undo
-if has('persistent_undo')
-    set undofile
-    set undodir=~/.vim/undo
-endif
-
-set number
 
 " syntax based folds and opening all folds on loading a file
 set foldmethod=syntax
 au BufRead * normal zR
 
+" search settings
 set ignorecase
 set smartcase
 set incsearch
@@ -63,11 +72,7 @@ set textwidth=79
 set formatoptions=qrn1
 "set formatoptions+=j " remove comment leader when joining lines
 
-if exists('+colorcolumn')
-    set colorcolumn=+1,+11,+21
-endif
-
-function SetDocumentSettings()
+function SetTextDocumentSettings()
     set textwidth=0
     set nolist
     set wrap
@@ -78,9 +83,9 @@ endfunction
 " }}}
 " {{{ Custom Filetype-based Settings
 
-autocmd BufEnter *.md set filetype=markdown | call SetDocumentSettings()
-autocmd BufEnter *.markdown call SetDocumentSettings()
-autocmd BufEnter *.rst call SetDocumentSettings()
+autocmd BufEnter *.md set filetype=markdown | call SetTextDocumentSetTexttings()
+autocmd BufEnter *.markdown call SetTextDocumentSetTexttings()
+autocmd BufEnter *.rst call SetTextDocumentSetTexttings()
 
 autocmd Filetype java set makeprg=javac\ %
 set errorformat=%A%f:%l:\ %m,%-Z%p^,%-C%.%#
@@ -118,6 +123,7 @@ nnoremap <leader>h1 yypVr=
 nnoremap <leader>h2 yypVr-
 
 nnoremap <leader>w :w<CR>
+
 " set python regexes
 "nnoremap / /\v
 "vnoremap / /\v
