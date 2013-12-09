@@ -1,0 +1,27 @@
+startup_message off
+
+#vbell off
+
+# enables mouse scrolling
+#termcapinfo xterm* ti@:te@
+
+# define a bigger scrollback, default is 100 lines
+defscrollback 1000
+
+# Detach session on hangup instead of terminating screen completely.
+autodetach on
+
+defmonitor off
+msgwait 3
+
+# Message to display in the status line when activity is detected in a
+# monitored window.
+activity  "activity in %n (%t)~"
+
+# If a window goes unresponsive, don't block the whole session waiting for it.
+defnonblock on
+
+#caption always "%{= kw}%?%-Lw%?%{+b kw}%n*%t%f %?(%u)%?%{= kw}%?%+Lw%?"
+
+hardstatus alwayslastline
+hardstatus string '%{= kG}[%{W}%H%{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{W}%m/%d %c:%s%{g}]'
