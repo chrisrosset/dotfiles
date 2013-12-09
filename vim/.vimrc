@@ -165,31 +165,36 @@ cmap w!!! w !sudo tee % > /dev/null
 try
     set rtp+=~/.vim/bundle/vundle/
     call vundle#rc()
-
     Bundle 'gmarik/vundle'
+
     Bundle 'tpope/vim-fugitive'
     Bundle 'tpope/vim-surround'
     Bundle 'Raimondi/delimitMate'
     Bundle 'Lokaltog/vim-easymotion'
     Bundle 'vim-scripts/SearchComplete'
+    Bundle 'scrooloose/nerdcommenter'
     Bundle 'mbbill/undotree'
 
     Bundle 'kien/rainbow_parentheses.vim'
-    try
-        au VimEnter * RainbowParenthesesToggle
-        au Syntax * RainbowParenthesesLoadRound
-        au Syntax * RainbowParenthesesLoadBraces
-        au Syntax * RainbowParenthesesLoadSquare
-    catch /^Vim\%((\a\+)\)\=:E492/
-    endtry
+    autocmd VimEnter * silent! RainbowParenthesesToggle
+    autocmd Syntax * silent! RainbowParenthesesLoadRound
+    autocmd Syntax * silent! RainbowParenthesesLoadBraces
+    autocmd Syntax * silent! RainbowParenthesesLoadSquare
 
     Bundle 'mhinz/vim-startify'
     let g:startify_bookmarks = [ '~/.vimrc', '~/.zshrc' ]
 
     Bundle 'bling/vim-airline'
+    let g:custom_status_line = 1
     let g:airline_powerline_fonts = 1
 
-catch /^Vim\%((\a\+)\)\=:E117/
+    " snipMate
+    Bundle 'MarcWeber/vim-addon-mw-utils'
+    Bundle 'tomtom/tlib_vim'
+    Bundle 'garbas/vim-snipmate'
+    Bundle 'honza/vim-snippets'
+catch
+    echo "Vundle not installed or incorrectly initialized."
 endtry
 
 
