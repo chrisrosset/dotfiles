@@ -1,6 +1,11 @@
 # rqg's zshrc file v0.1 based on:
 # kcbanner's zshrc file v0.1, jdong's zshrc file v0.2.1 and mako's zshrc file v0.1
 
+# source common shell settings
+if [ -r "~/.shrc" ]; then
+    . "~/.shrc"
+fi
+
 # Sections (these are searchable comments):
 #
 # keybindings
