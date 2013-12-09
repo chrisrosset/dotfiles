@@ -1,6 +1,7 @@
 " disables vi compatibility mode
 set nocompatible
 
+" {{{ Visual Settings
 filetype plugin indent on
 
 " syntax highlighting
@@ -15,6 +16,8 @@ catch /^Vim\%((\a\+)\)\=:E185/
     colorscheme desert
 endtry
 
+" }}}
+" {{{ General Settings
 " tab settings
 set tabstop=4
 set shiftwidth=4
@@ -72,6 +75,9 @@ function SetDocumentSettings()
     set formatoptions+=aw
 endfunction
 
+" }}}
+" {{{ Custom Filetype-based Settings
+
 autocmd BufEnter *.md set filetype=markdown | call SetDocumentSettings()
 autocmd BufEnter *.markdown call SetDocumentSettings()
 autocmd BufEnter *.rst call SetDocumentSettings()
@@ -79,7 +85,8 @@ autocmd BufEnter *.rst call SetDocumentSettings()
 autocmd Filetype java set makeprg=javac\ %
 set errorformat=%A%f:%l:\ %m,%-Z%p^,%-C%.%#
 
-" ============================= CUSTOM KEY-MAPPINGS
+" }}}
+" {{{ Custom Key-bindings
 
 " set leader key
 let mapleader = "\<space>"
@@ -154,13 +161,13 @@ map <F3> :call TogglePaste()<CR>
 map <F5> "+y<CR>
 map <F6> "+p<CR>
 
-
-" ============================= CUSTOM COMMANDS
+" }}}
+" {{{ Custom Commands
 
 cmap w!!! w !sudo tee % > /dev/null
 
-
-" ============================= PLUGINS
+" }}}
+" {{{ Plugins and Plugin Settings
 
 try
     set rtp+=~/.vim/bundle/vundle/
@@ -197,8 +204,8 @@ catch
     echo "Vundle not installed or incorrectly initialized."
 endtry
 
-
-" ============================= STATUS LINE
+" }}}
+" {{{ Default Status Line
 
 if exists(g:custom_status_line) ==? 0
     set laststatus=2
@@ -214,3 +221,7 @@ if exists(g:custom_status_line) ==? 0
     set statusline+=%9*\ col:%03c\                            "Colnr
     set statusline+=%0*\ \ %m%r%w\ %P\ \                      "Modified? Readonly? Top/bot.
 endif
+
+" }}}
+
+" vim: set foldmethod=marker:
