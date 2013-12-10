@@ -19,6 +19,17 @@ if exists('+colorcolumn')
 endif
 
 " }}}
+" {{{ GUI Settings
+
+if has('gui_running')
+    set guifont=Terminus\ 8,MiscFixed\ 12
+    set guioptions-=M " remove filebar
+    set guioptions-=M " remove menubar
+    set guioptions-=T " remove toolbar
+    set guioptions-=r " remove scrollbar
+endif
+
+" }}}
 " {{{ General Settings
 
 " disables vi compatibility mode
