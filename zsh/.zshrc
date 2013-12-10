@@ -187,31 +187,6 @@ RPS1="%(?..[%?])$PR_LIGHT_YELLOW(%D{%d/%m %H:%M})$PR_NO_COLOR"
 
 unsetopt ALL_EXPORT
 
-######################################## ALIASES (start)
-if [[ $(uname) == "Linux" ]]; then
-	LS_COLOR="--color=auto"
-fi
-
-alias cl="clear"
-alias ls="ls $LS_COLOR"
-alias l="ls $LS_COLOR"
-alias ll="ls -lh $LS_COLOR"
-alias lll="ls -lah $LS_COLOR"
-alias ..='cd ..'
-alias cd..='cd ..'
-alias cal='cal -m'
-alias nano='vim'
-alias vi='vim'
-alias cmus='singleton.sh cmus'
-alias rtorrent='singleton.sh rtorrent'
-alias cpr='rsync --archive --verbose --progress'
-
-alias ga='git add'
-alias gc='git commit'
-alias gl='git log'
-alias gs='git status'
-
-######################################## ALIASES (end)
 
 autoload -U compinit
 compinit

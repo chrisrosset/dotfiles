@@ -21,3 +21,37 @@ PrefixPATH "$HOME/.cabal/bin"
 PrefixPATH "$HOME/arch/`uname -s`/bin"
 
 # }}}
+# {{{ Aliases
+
+# standard shell aliases
+alias l='ls'
+alias ll='ls -lh --color=auto'
+alias lll='ls -lah --color=auto'
+alias cd..='cd ..'
+alias nano='vim'
+alias vi='vim'
+alias cl='clear'
+alias cpr='rsync --archive --verbose --progress'
+
+# git aliases
+if command -v git 2>&1 > /dev/null; then
+    alias ga='git add'
+    alias gb='git branch'
+    alias gc='git commit'
+    alias gco='git checkout'
+    alias gd='git diff'
+    alias gl='git log'
+    alias gs='git status'
+fi
+
+
+if [ -n "$BBENV" ]; then
+    # Bloomberg aliases
+    alias chimera="/etc/bb/chimera/chimera-tool"
+    alias getLevel='/bbsrc/bin/prod/bin/aotools/getLevel'
+fi
+
+# }}}
+
+
+# vim: set foldmethod=marker:
