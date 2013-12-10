@@ -1,0 +1,23 @@
+# {{{ Functions
+
+PrefixPATH()
+{
+    toAdd=$1
+    # first check if the location exists
+    if [ -d "$toAdd" ] ; then
+        # only add it to PATH if it's not already there
+        if [ -z "$(echo $PATH | sed -e 's/:/\n/g' | grep "^$toAdd$")" ]; then
+            export PATH="$toAdd:$PATH"
+        fi
+    fi
+}
+
+# }}}
+# {{{ PATH Manipulation
+
+PrefixPATH "/opt/administration/scripts-general"
+PrefixPATH "$HOME/bin"
+PrefixPATH "$HOME/.cabal/bin"
+PrefixPATH "$HOME/arch/`uname -s`/bin"
+
+# }}}

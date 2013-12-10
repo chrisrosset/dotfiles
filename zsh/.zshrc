@@ -116,29 +116,6 @@ bindkey '^x^e' edit-command-line
 
 ######################################## GLOBAL VARIABLES (start)
 
-# add the personal administration scripts path
-if [ -d "/opt/administration/scripts-general" ] ; then
-	PATH="$HOME/bin:$PATH"
-fi
-
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-	# only add it to PATH if it's not already there
-	if [ -z "`echo $PATH | sed -e "s/:/\n/g" | grep "^$HOME/bin$"`" ]; then
-		PATH="$HOME/bin:$PATH"
-	fi
-fi
-
-# include user's cabal bin directory
-cabal=$HOME/.cabal/bin
-if [ -d "$cabal" ] ; then
-	# only add it to PATH if it's not already there
-	if [ -z "`echo $PATH | sed -e "s/:/\n/g" | grep "^$cabal$"`" ]; then
-		PATH="$PATH:$cabal"
-	fi
-fi
-unset cabal
-
 if [ ! -d "$HOME"/.zsh ]; then
 	mkdir "$HOME"/.zsh
 fi
