@@ -76,23 +76,38 @@ bindkey -e
 
 # }}}
 # {{{ Shell Options
-setopt ALL_EXPORT # unset later in this file
 
-# doesn't write commands starting with a space to history
 setopt histignorespace
+setopt histignoredups
+setopt incappendhistory
+setopt sharehistory
+setopt extendedhistory
 
-setopt histignoredups incappendhistory sharehistory extendedhistory
-setopt notify globdots correct cdablevars autolist
-setopt autocd recexact longlistjobs nohup
-setopt autoresume list_ambiguous
-setopt autopushd pushdminus pushdtohome pushdsilent
-setopt extendedglob rcquotes mailwarning
+setopt autopushd
+setopt pushdminus
+setopt pushdtohome
+setopt pushdsilent
+
+setopt notify
+setopt globdots
+setopt correct
+setopt autolist
+setopt autocd
+setopt recexact
+setopt longlistjobs
+setopt nohup
+setopt autoresume
+setopt list_ambiguous
+setopt extendedglob
+setopt rcquotes
+setopt mailwarning
 
 # Demands confirmation after 'rm *' etc (waits 10s)
 # Helps avoid mistakes like 'rm * o' when 'rm *.o' was intended
 setopt RM_STAR_WAIT
 
-unsetopt bgnice autoparamslash
+unsetopt bgnice
+unsetopt autoparamslash
 
 # }}}
 # {{{ Shell Modules
@@ -179,9 +194,6 @@ RPS1="%(?..[%?])$PR_LIGHT_YELLOW(%D{%d/%m %H:%M})$PR_NO_COLOR"
 
 # }}}
 # {{{ Autocompletion Settings
-
-unsetopt ALL_EXPORT
-
 
 autoload -U compinit
 compinit
