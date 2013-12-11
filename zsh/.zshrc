@@ -77,37 +77,45 @@ bindkey -e
 # }}}
 # {{{ Shell Options
 
-setopt histignorespace
-setopt histignoredups
-setopt incappendhistory
-setopt sharehistory
-setopt extendedhistory
-
+# changing directories
+setopt autocd
 setopt autopushd
 setopt pushdminus
-setopt pushdtohome
 setopt pushdsilent
+setopt pushdtohome
 
-setopt notify
-setopt globdots
-setopt correct
+# completion
 setopt autolist
-setopt autocd
-setopt recexact
-setopt longlistjobs
-setopt nohup
-setopt autoresume
-setopt list_ambiguous
-setopt extendedglob
-setopt rcquotes
-setopt mailwarning
-
-# Demands confirmation after 'rm *' etc (waits 10s)
-# Helps avoid mistakes like 'rm * o' when 'rm *.o' was intended
-setopt RM_STAR_WAIT
-
-unsetopt bgnice
 unsetopt autoparamslash
+
+# expansion and globbing
+setopt extendedglob
+setopt globdots
+setopt list_ambiguous
+setopt list_packed
+setopt recexact
+
+# history
+setopt extendedhistory
+setopt histignorespace
+setopt histignoredups
+setopt sharehistory
+setopt incappendhistory
+
+# input/output
+setopt correct
+setopt hash_cmds
+setopt mailwarning
+setopt rcquotes
+setopt rm_star_wait # Demands confirmation after 'rm *' etc (waits 10s)
+
+# job control
+setopt autoresume
+unsetopt bgnice
+setopt checkjobs
+setopt nohup
+setopt longlistjobs
+setopt notify
 
 # }}}
 # {{{ Shell Modules
