@@ -133,7 +133,6 @@ fi
 HISTFILE=$HOME/.zsh/.zhistory
 HISTSIZE=100000
 SAVEHIST=100000
-HOSTNAME="`hostname`"
 
 if [ -d "/opt/administration" ]; then
 	source "/opt/administration/library.sh"

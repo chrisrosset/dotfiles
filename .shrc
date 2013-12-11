@@ -52,6 +52,11 @@ if [ -n "$BBENV" ]; then
 fi
 
 # }}}
+# {{{ Global Variables
+
+[ -n "$HOSTNAME" ] || export HOSTNAME="`hostname`"
+
+# }}}
 
 
 # vim: set foldmethod=marker:
