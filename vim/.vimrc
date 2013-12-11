@@ -198,9 +198,12 @@ try
     Bundle 'tpope/vim-surround'
     Bundle 'Raimondi/delimitMate'
     Bundle 'Lokaltog/vim-easymotion'
-    Bundle 'vim-scripts/SearchComplete'
+    "Bundle 'vim-scripts/SearchComplete'
     Bundle 'scrooloose/nerdcommenter'
     Bundle 'mbbill/undotree'
+
+    Bundle 'majutsushi/tagbar'
+    nmap <F8> :TagbarToggle<CR>
 
     Bundle 'kien/rainbow_parentheses.vim'
     autocmd VimEnter * silent! RainbowParenthesesToggle
