@@ -1,23 +1,22 @@
 # rqg's zshrc file v0.1 based on:
 # kcbanner's zshrc file v0.1, jdong's zshrc file v0.2.1 and mako's zshrc file v0.1
 
+# {{{ Basic Setup
+
 # source common shell settings
 if [ -r "~/.shrc" ]; then
     . "~/.shrc"
 fi
 
-# Sections (these are searchable comments):
-#
-# keybindings
-# setopts
-# modules
-# global variables
-# colors
-# prompt
-# aliases
-# completion
 
-######################################## KEYBINDINGS (start)
+
+# }}}
+# {{{ Functions
+
+
+
+# }}}
+# {{{ Keybindings
 
 #bindkey "\e[1~" beginning-of-line
 #bindkey "e[4~" end-of-line
@@ -75,11 +74,8 @@ bindkey "^f" history-incremental-search-forward
 bindkey '^I' complete-word # complete on tab, leave expansion to _expand
 bindkey -e
 
-######################################## KEYBINDINGS (end)
-
-######################################## SETOPTS (start)
-# Set/unset shell options
-
+# }}}
+# {{{ Shell Options
 setopt ALL_EXPORT # unset later in this file
 
 # doesn't write commands starting with a space to history
@@ -98,23 +94,22 @@ setopt RM_STAR_WAIT
 
 unsetopt bgnice autoparamslash
 
-######################################## SETOPTS (end)
+# }}}
+# {{{ Shell Modules
 
-######################################## MODULES (start)
 # Autoload zsh modules when they are referenced
-
 zmodload -a zsh/mapfile mapfile
 zmodload -a zsh/stat stat
 zmodload -a zsh/zprof zprof
 zmodload -a zsh/zpty zpty
 
-######################################## MODULES (end)
+# }}}
 
 autoload edit-command-line
 zle -N edit-command-line
 bindkey '^x^e' edit-command-line
 
-######################################## GLOBAL VARIABLES (start)
+# {{{ Global Variables
 
 if [ ! -d "$HOME"/.zsh ]; then
 	mkdir "$HOME"/.zsh
@@ -155,9 +150,8 @@ WORDCHARS=$(echo "$WORDCHARS" | sed "s/[=./_-]//g")
 # Say how long a command took, if it took more than 30 seconds
 REPORTTIME=10
 
-######################################## GLOBAL VARIABLES (end)
-
-######################################## COLORS (start)
+# }}}
+# {{{ Colors
 
 autoload colors zsh/terminfo
 if [[ "$terminfo[colors]" -ge 8 ]]; then
@@ -170,9 +164,9 @@ if [ -f ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
 	source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
-######################################## COLORS (end)
+# }}}
+# {{{ Prompt
 
-######################################## PROMPT (start)
 for color in RED GREEN YELLOW BLUE MAGENTA CYAN WHITE; do
     eval PR_$color='%{$terminfo[bold]$fg[${(L)color}]%}'
     eval PR_LIGHT_$color='%{$fg[${(L)color}]%}'
@@ -183,16 +177,14 @@ PR_NO_COLOR="%{$terminfo[sgr0]%}"
 PS1="[$PR_BLUE%n$PR_WHITE@$PR_GREEN%m%u$PR_NO_COLOR:$PR_RED%2c$PR_NO_COLOR]%(!.#.$) "
 RPS1="%(?..[%?])$PR_LIGHT_YELLOW(%D{%d/%m %H:%M})$PR_NO_COLOR"
 
-######################################## PROMPT (end)
+# }}}
+# {{{ Autocompletion Settings
 
 unsetopt ALL_EXPORT
 
 
 autoload -U compinit
 compinit
-
-
-######################################## COMPLETION (start)
 
 zstyle ':completion::complete:*' use-cache on
 zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
