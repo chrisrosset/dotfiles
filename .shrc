@@ -12,6 +12,11 @@ PrefixPATH()
     fi
 }
 
+CommandAvailable()
+{
+    [ -n "$1" ] && command -v "$1" 2>&1 > /dev/null
+}
+
 # }}}
 # {{{ PATH Manipulation
 
@@ -34,7 +39,7 @@ alias cl='clear'
 alias cpr='rsync --archive --verbose --progress'
 
 # git aliases
-if command -v git 2>&1 > /dev/null; then
+if CommandAvailable git; then
     alias ga='git add'
     alias gb='git branch'
     alias gc='git commit'
@@ -44,11 +49,15 @@ if command -v git 2>&1 > /dev/null; then
     alias gs='git status'
 fi
 
+if CommandAvailable "singleton.sh"; then
+    CommandAvailable cmus && alias cmus='singleton.sh cmus'
+    CommandAvailable rtorrent && alias rtorrent='singleton.sh rtorrent'
+fi
 
 if [ -n "$BBENV" ]; then
     # Bloomberg aliases
-    alias chimera="/etc/bb/chimera/chimera-tool"
-    alias getLevel='/bbsrc/bin/prod/bin/aotools/getLevel'
+    [ ! CommandAvailable chimera ] && alias chimera="/etc/bb/chimera/chimera-tool"
+    [ ! CommandAvailable getLevel ] && alias getLevel='/bbsrc/bin/prod/bin/aotools/getLevel'
 fi
 
 # }}}
