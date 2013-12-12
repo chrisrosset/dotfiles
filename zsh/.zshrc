@@ -4,8 +4,10 @@
 # {{{ Basic Setup
 
 # source common shell settings
-if [ -r "~/.shrc" ]; then
-    . "~/.shrc"
+if [ -e ~/.shrc ]; then
+    . ~/.shrc
+else
+    echo "WARN: Common shell setup file missing."
 fi
 
 
