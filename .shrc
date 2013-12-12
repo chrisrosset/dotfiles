@@ -2,13 +2,12 @@
 
 PrefixPATH()
 {
-    toAdd=$1
     # first check if the location exists
-    if [ -d "$toAdd" ] ; then
-        # only add it to PATH if it's not already there
-        if [ -z "$(echo $PATH | sed -e 's/:/\n/g' | grep "^$toAdd$")" ]; then
-            export PATH="$toAdd:$PATH"
-        fi
+    [ ! -d "$1" ] && return 1
+
+    # only add it to PATH if it's not already there
+    if [ -z "$(echo "${PATH}" | sed -e 's/:/\n/g' | grep "^${1}$")" ]; then
+        export PATH="${1}:${PATH}"
     fi
 }
 
@@ -21,9 +20,9 @@ CommandAvailable()
 # {{{ PATH Manipulation
 
 PrefixPATH "/opt/administration/scripts-general"
-PrefixPATH "$HOME/bin"
-PrefixPATH "$HOME/.cabal/bin"
-PrefixPATH "$HOME/arch/`uname -s`/bin"
+PrefixPATH "${HOME}/.cabal/bin"
+PrefixPATH "${HOME}/bin"
+PrefixPATH "${HOME}/arch/`uname -s`/bin"
 
 # }}}
 # {{{ Aliases
