@@ -10,12 +10,33 @@ else
     echo "WARN: Common shell setup file missing."
 fi
 
+ZSHDIR="$HOME/.zsh"
+[ -d "$ZSHDIR" ] || mkdir "$ZSHDIR"
 
+HISTFILE="$ZSHDIR/zhistory"
+HISTSIZE=100000
+SAVEHIST=100000
+PAGER='less'
+EDITOR="vim"
+
+# stop backwards-delete-word at '=', '.', '/', '_' and '-' characters
+WORDCHARS=$(echo "$WORDCHARS" | sed "s/[=./_-]//g")
+
+# Say how long a command took, if it took more seconds than specified
+REPORTTIME=10
 
 # }}}
 # {{{ Functions
 
+function BackupZshHistoryFile()
+{
+    if [ ! -f "$HISTFILE" ]; then
+        echo "The zhistory file does not exist."
+        exit 1
+    fi
 
+    cp "$HISTFILE" "$HISTFILE-`date +%Y-%m-%d_%H-%M-%S`.bak"
+}
 
 # }}}
 # {{{ Keybindings
@@ -136,43 +157,27 @@ bindkey '^x^e' edit-command-line
 
 # {{{ Global Variables
 
-if [ ! -d "$HOME"/.zsh ]; then
-	mkdir "$HOME"/.zsh
-fi
-
-HISTFILE=$HOME/.zsh/.zhistory
-HISTSIZE=100000
-SAVEHIST=100000
-
 if [ -d "/opt/administration" ]; then
 	source "/opt/administration/library.sh"
-
 	TZ=`get_host_info 'TZ' 'Europe/London'`
 fi
 
 
-PAGER='less'
-EDITOR="vim"
-LC_ALL='en_US.UTF-8'
-LANG='en_US.UTF-8'
+#LC_ALL='en_US.UTF-8'
+#LANG='en_US.UTF-8'
 
-if [ $TERM = "xterm" ]; then
-	infocmp xterm-256color > /dev/null 2>&1
-	if [ $? ]; then
-		TERM=xterm-256color
-	fi
-elif [ $TERM = "screen" ]; then
-	infocmp screen-256color > /dev/null 2>&1
-	if [ $? ]; then
-		TERM=screen-256color
-	fi
-fi
+#if [ $TERM = "xterm" ]; then
+#	infocmp xterm-256color > /dev/null 2>&1
+#	if [ $? ]; then
+#		TERM=xterm-256color
+#	fi
+#elif [ $TERM = "screen" ]; then
+#	infocmp screen-256color > /dev/null 2>&1
+#	if [ $? ]; then
+#		TERM=screen-256color
+#	fi
+#fi
 
-# stop backwards-delete-word at '=', '.', '/', '_' and '-' characters
-WORDCHARS=$(echo "$WORDCHARS" | sed "s/[=./_-]//g")
-
-# Say how long a command took, if it took more than 30 seconds
-REPORTTIME=10
 
 # }}}
 # {{{ Colors
