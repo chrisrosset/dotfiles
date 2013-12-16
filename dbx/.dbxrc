@@ -1,0 +1,39 @@
+# rc file for the Oracle dbx command-line debugger
+# inspired by: https://blogs.oracle.com/dbx/entry/share_your_dbxrc_entries
+
+# {{{ General Settings
+
+dbxenv suppress_startup_message 7.7
+
+# }}}
+# {{{ Environment Variables
+
+PS1='(dbx:$vfunc) '    # this prompt shows function you are currently in;
+                       # for example: (dbx:main)
+
+# }}}
+# {{{ Aliases
+
+alias n='next'           # next line, step over calls
+alias ni='nexti'         # next instruction, step over calls
+alias s='step'           # next line, step into calls
+alias si='stepi'         # next instruction, step into calls
+alias w='where -l -h'    # stack trace, show hidden frames and loadobject
+alias p='print'
+alias pp='print +p'      # rarely required "don't prettyprint" option
+alias ph='print -f llx ' # print number in hex, useful for registers
+alias lw='list -w'       # list current line and several lines before/after
+alias c='cont'           # continue execution
+alias t='threads'        # show threads
+alias l='list'
+alias lo='loadobject'    # rarely used command, but with a very long name
+alias b='stop in'        # stop in function; for example, `b main'
+alias f='frame -h'       # switch to certain stack frame even if it's hidden
+alias q='exit'           # exit dbx
+alias start='stop in main -temp; run' # convenient alias for gdb start command`
+alias break='stop at '   # alias for gdb's break
+
+# }}}
+
+
+# vim: set foldmethod=marker
