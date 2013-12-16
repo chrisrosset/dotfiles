@@ -55,8 +55,8 @@ fi
 
 if [ -n "$BBENV" ]; then
     # Bloomberg aliases
-    [ ! CommandAvailable chimera ] && alias chimera="/etc/bb/chimera/chimera-tool"
-    [ ! CommandAvailable getLevel ] && alias getLevel='/bbsrc/bin/prod/bin/aotools/getLevel'
+    [ ! `CommandAvailable chimera` ] && alias chimera="/etc/bb/chimera/chimera-tool"
+    [ ! `CommandAvailable getLevel` ] && alias getLevel='/bbsrc/bin/prod/bin/aotools/getLevel'
 fi
 
 # }}}
