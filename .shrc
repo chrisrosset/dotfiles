@@ -1,3 +1,8 @@
+#!/bin/sh
+
+# Shell settings to be shared across any shell. This file should be sourced
+# at the very top of another shell's rc file.
+
 # {{{ Functions
 
 PrefixPATH()
