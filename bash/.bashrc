@@ -5,3 +5,4 @@ if [ -r "~/.shrc" ]; then
     . "~/.shrc"
 fi
 
+PS1="[\u@\h:\W]\\$ "
