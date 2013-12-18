@@ -85,11 +85,12 @@ set foldmethod=syntax
 au BufRead * normal zR
 
 " search settings
-set ignorecase
-set smartcase
-set incsearch
-set showmatch
-set hlsearch
+set ignorecase   " Default to using case insensitive searches,
+set smartcase    " unless uppercase letters are used in the regex.
+set hlsearch     " Highlight searches by default.
+set incsearch    " Incrementally search while typing a /regex
+set showmatch    " When a bracket is inserted, briefly jump to the matching one
+set matchtime=2  " 10ths of a sec to highlight the showmatch
 
 set nowrap
 set textwidth=79
