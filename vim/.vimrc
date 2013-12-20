@@ -161,11 +161,16 @@ vnoremap <tab> %
 nnoremap j gj
 nnoremap k gk
 
+" keeps the visual selection active after indenting
+vmap > >gv
+vmap < <gv
+
 " enable using semicolon instead of colon to enter command mode
 " nnoremap ; :
 
 inoremap jj <ESC>
 nnoremap qqq :qa<CR>
+nnoremap QQQ :qa!<CR>
 
 function TogglePaste()
     if(&paste == 0)
