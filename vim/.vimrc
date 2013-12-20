@@ -5,8 +5,12 @@
 
 set number
 set ttyfast
+set listchars=tab:>-,trail:$
+set list
 
 syntax on
+
+set t_Co=256
 
 try
     colorscheme jellybeans
@@ -48,8 +52,6 @@ endif
 " disables vi compatibility mode
 set nocompatible
 
-set t_Co=256
-
 if has('persistent_undo')
     set undofile
     set undodir=~/.vim/undo
@@ -71,8 +73,6 @@ set showmode
 set showcmd
 set hidden
 set wildmenu
-set listchars=tab:▸\ ,trail:$
-set list
 set wildmode=list:longest
 set visualbell
 set ruler
