@@ -42,6 +42,10 @@ alias vi='vim'
 alias cl='clear'
 alias cpr='rsync --archive --verbose --progress'
 
+if CommandAvailable tmux; then
+    alias tmux='tmux -2'
+fi
+
 # git aliases
 if CommandAvailable git; then
     alias ga='git add'
