@@ -74,15 +74,15 @@ set showcmd
 set hidden
 set wildmenu
 set wildmode=list:longest
-set visualbell
+set t_vb= " disable error bells
 set ruler
 set backspace=indent,eol,start
 set mouse=a
-
+set splitright " New windows open to the right of the current one
 
 " syntax based folds and opening all folds on loading a file
 set foldmethod=syntax
-au BufRead * normal zR
+autocmd BufRead * normal zR
 
 " search settings
 set ignorecase   " Default to using case insensitive searches,
