@@ -172,6 +172,17 @@ inoremap jj <ESC>
 nnoremap qqq :qa<CR>
 nnoremap QQQ :qa!<CR>
 
+" enable the dot command for visual mode (useful for ranges)
+xnoremap . :normal .<CR>
+
+" run macro over a visual selection
+function! ExecuteMacroOverVisualRange()
+  echo "@".getcmdline()
+  execute ":'<,'>normal @".nr2char(getchar())
+endfunction
+
+xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
+
 function TogglePaste()
     if(&paste == 0)
         set paste
