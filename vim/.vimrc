@@ -153,10 +153,6 @@ nnoremap <leader>w :w<CR>
 "nnoremap / /\v
 "vnoremap / /\v
 
-" enable use of tab to jump between opening/closing elements
-nnoremap <tab> %
-vnoremap <tab> %
-
 " enables moving cursor by display lines when wrapping
 nnoremap j gj
 nnoremap k gk
