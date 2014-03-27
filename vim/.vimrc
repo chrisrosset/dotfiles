@@ -214,6 +214,9 @@ try
     "Bundle 'vim-scripts/SearchComplete'
     Bundle 'scrooloose/nerdcommenter'
     Bundle 'mbbill/undotree'
+    Bundle 'benmills/vimux'
+
+    Bundle 'derekwyatt/vim-fswitch'
 
     Bundle 'majutsushi/tagbar'
     nmap <F8> :TagbarToggle<CR>
