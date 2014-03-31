@@ -79,6 +79,7 @@ set ruler
 set backspace=indent,eol,start
 set mouse=a
 set splitright " New windows open to the right of the current one
+set clipboard^=unnamed
 
 " syntax based folds and opening all folds on loading a file
 set foldmethod=syntax
