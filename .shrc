@@ -40,7 +40,7 @@ alias cd..='cd ..'
 alias nano='vim'
 alias vi='vim'
 alias cl='clear'
-alias cpr='rsync --archive --verbose --progress'
+alias cpr='rsync --archive --verbose --progress --stats'
 
 if CommandAvailable tmux; then
     alias tmux='tmux -2'
