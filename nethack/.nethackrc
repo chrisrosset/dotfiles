@@ -1,0 +1,11 @@
+# Boolean options
+OPTIONS=autodig
+OPTIONS=!autopickup
+OPTIONS=autoquiver
+OPTIONS=color
+OPTIONS=paranoid_hit
+OPTIONS=time
+
+# Compound optins
+OPTIONS=boulder:0
+OPTIONS=msghistory:100
