@@ -98,19 +98,19 @@ set formatoptions=qrn1
 "set formatoptions+=j " remove comment leader when joining lines
 
 function SetTextDocumentSettings()
-    set textwidth=0
-    set nolist
-    set wrap
-    set linebreak
-    set formatoptions+=aw
+    setlocal textwidth=0
+    setlocal nolist
+    setlocal wrap
+    setlocal linebreak
 endfunction
 
 " }}}
 " {{{ Custom Filetype-based Settings
 
-autocmd BufEnter *.md set filetype=markdown | call SetTextDocumentSetTexttings()
-autocmd BufEnter *.markdown call SetTextDocumentSetTexttings()
-autocmd BufEnter *.rst call SetTextDocumentSetTexttings()
+autocmd BufEnter *.md set filetype=markdown | call SetTextDocumentSettings()
+autocmd BufEnter *.markdown call SetTextDocumentSettings()
+autocmd BufEnter *.rst call SetTextDocumentSettings()
+autocmd BufEnter *.tex call SetTextDocumentSettings()
 
 autocmd Filetype java set makeprg=javac\ %
 set errorformat=%A%f:%l:\ %m,%-Z%p^,%-C%.%#
