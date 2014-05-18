@@ -8,33 +8,33 @@ CommandAvailable ()
 
 install_rc()
 {
-	IFS=`printf ' '` && for dotpath in $@; do
+    IFS=`printf ' '` && for dotpath in $@; do
 
-		file=$(echo $dotpath | sed 's/\//\t\t/' | sed "s/^.*\t\t//")
-		target="$HOME/$file"
+        file=$(echo $dotpath | sed 's/\//\t\t/' | sed "s/^.*\t\t//")
+        target="$HOME/$file"
 
-		echo "   $file"
-		if [ ! -e "$dotfiles/$dotpath" ]; then
-			echo "      - File not available in the dotfiles; skipping."
-			continue
-		elif [ -e "$target" ] && [ ! -L "$target" ]; then
-			echo "      - Found a regular file or a directory; skipping."
-			continue
-		elif [ -L $target ]; then
-			echo "      - Found a symlink; deleting."
-			rm $target
-		fi
+        echo "   $file"
+        if [ ! -e "$dotfiles/$dotpath" ]; then
+            echo "      - File not available in the dotfiles; skipping."
+            continue
+        elif [ -e "$target" ] && [ ! -L "$target" ]; then
+            echo "      - Found a regular file or a directory; skipping."
+            continue
+        elif [ -L $target ]; then
+            echo "      - Found a symlink; deleting."
+            rm $target
+        fi
 
-		echo "      - Creating symlink."
-		ln -s "$dotfiles/$dotpath" $target
-	done
+        echo "      - Creating symlink."
+        ln -s "$dotfiles/$dotpath" $target
+    done
 }
 
 ################################################################################
 
 if [ ! -d "$dotfiles" ]; then
-	echo "The dotfiles folder must be located in $HOME/$dotfiles."
-	exit 1
+    echo "The dotfiles folder must be located in $HOME/$dotfiles."
+    exit 1
 fi
 
 for program in *; do
@@ -54,9 +54,8 @@ for program in *; do
         continue
     fi
 
-    for rc in $program/.*; do
-        ( [ ${rc} == "${program}/." ] || [ ${rc} == "${program}/.." ] ) && continue
-
-        install_rc ${rc}
+    # TODO: this breaks on files with newlines
+    find "$program" -mindepth 1 -maxdepth 1 -not -path "" | while read file; do
+        install_rc ${file}
     done
 done
