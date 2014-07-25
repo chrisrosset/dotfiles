@@ -217,6 +217,7 @@ try
     Bundle 'scrooloose/nerdcommenter'
     Bundle 'mbbill/undotree'
     Bundle 'benmills/vimux'
+    Bundle 'kien/ctrlp.vim'
 
     Bundle 'derekwyatt/vim-fswitch'
     nnoremap <leader>fsh :FSSplitLeft<CR>
