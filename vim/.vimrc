@@ -226,11 +226,8 @@ try
     Bundle 'majutsushi/tagbar'
     nmap <F8> :TagbarToggle<CR>
 
-    Bundle 'kien/rainbow_parentheses.vim'
-    autocmd VimEnter * silent! RainbowParenthesesToggle
-    autocmd Syntax * silent! RainbowParenthesesLoadRound
-    autocmd Syntax * silent! RainbowParenthesesLoadBraces
-    autocmd Syntax * silent! RainbowParenthesesLoadSquare
+    Bundle 'luochen1990/rainbow'
+    let g:rainbow_active = 1
 
     Bundle 'mhinz/vim-startify'
     let g:startify_bookmarks = [ '~/.vimrc', '~/.zshrc' ]
