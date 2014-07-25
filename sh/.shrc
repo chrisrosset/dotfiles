@@ -62,18 +62,13 @@ if CommandAvailable "singleton.sh"; then
     CommandAvailable rtorrent && alias rtorrent='singleton.sh rtorrent'
 fi
 
-if [ -n "$BBENV" ]; then
-    # Bloomberg aliases
-    [ ! `CommandAvailable chimera` ] && alias chimera="/etc/bb/chimera/chimera-tool"
-    [ ! `CommandAvailable getLevel` ] && alias getLevel='/bbsrc/bin/prod/bin/aotools/getLevel'
-fi
-
 # }}}
 # {{{ Global Variables
 
 [ -n "$HOSTNAME" ] || export HOSTNAME="`hostname`"
 
 # }}}
-
+# {{{ Miscellaneous
+# }}}
 
 # vim: set foldmethod=marker:
