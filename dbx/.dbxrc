@@ -4,6 +4,7 @@
 # {{{ General Settings
 
 dbxenv suppress_startup_message 7.7
+dbxenv suppress_startup_message 7.9
 
 # }}}
 # {{{ Environment Variables
