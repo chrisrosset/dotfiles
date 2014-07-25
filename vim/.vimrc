@@ -4,6 +4,7 @@
 " {{{ Visual Settings
 
 set number
+set lazyredraw
 set ttyfast
 set listchars=tab:>-,trail:$
 set list
