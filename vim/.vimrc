@@ -218,6 +218,10 @@ try
     Bundle 'benmills/vimux'
 
     Bundle 'derekwyatt/vim-fswitch'
+    nnoremap <leader>fsh :FSSplitLeft<CR>
+    nnoremap <leader>fsj :FSSplitBelow<CR>
+    nnoremap <leader>fsk :FSSplitAbove<CR>
+    nnoremap <leader>fsl :FSSplitRight<CR>
 
     Bundle 'majutsushi/tagbar'
     nmap <F8> :TagbarToggle<CR>
