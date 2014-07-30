@@ -4,9 +4,8 @@
 
 ;; evil
 ;; - vi emulation mode
+(setq evil-want-C-u-scroll t)
 (with-library evil
-  (setq evil-want-C-u-scroll t)
-  (require 'evil)
   (evil-mode 1))
 
 ;; fiplr
