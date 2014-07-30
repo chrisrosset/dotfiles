@@ -21,6 +21,10 @@
 (setq require-final-newline t)
 (show-paren-mode t)
 
+(setq x-select-enable-clipboard t)
+(setq x-select-enable-primary t)
+(setq mouse-drag-copy-region t)
+
 ;; tab settings
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
