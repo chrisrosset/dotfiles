@@ -28,6 +28,11 @@
   (require 'smartparens-config)
   (smartparens-global-mode t))
 
+;; undo-tree
+;; - vim-like undo and redo functionality
+(with-library undo-tree
+  (global-undo-tree-mode))
+
 ;; yasnippet
 ;; - defining and expanding snippets
 (with-library yasnippet
