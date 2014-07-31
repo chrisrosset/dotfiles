@@ -1,4 +1,4 @@
-# rqg's zshrc file v0.1 based on:
+# ctr's zshrc file v0.1 based on:
 # kcbanner's zshrc file v0.1, jdong's zshrc file v0.2.1 and mako's zshrc file v0.1
 
 # {{{ Basic Setup
@@ -202,8 +202,29 @@ fi
 # }}}
 # {{{ Prompt
 
-PS1="[$PR_BLUE%n$PR_WHITE@$PR_GREEN%m%u$PR_NO_COLOR:$PR_RED%2c$PR_NO_COLOR]%(!.#.$) "
-RPS1="%(?..[%?])$PR_LIGHT_YELLOW(%D{%d/%m %H:%M})$PR_NO_COLOR"
+CPS1="[$PR_BLUE%n$PR_WHITE@$PR_GREEN%m%u$PR_NO_COLOR:$PR_RED%2c$PR_NO_COLOR]%(!.#.$) "
+CRPS1="%(?..[%?])$PR_LIGHT_YELLOW(%D{%d/%m %H:%M})$PR_NO_COLOR"
+
+case "$TERM" in
+    "dumb")
+        PS1="$ "
+        unsetopt zle
+        unsetopt prompt_cr
+        unsetopt prompt_subst
+        unfunction precmd
+        unfunction preexec
+        ;;
+    "eterm")
+        PS1="$CPS1"
+        ;;
+    "eterm-color")
+        PS1="$CPS1"
+        ;;
+    *)
+        PS1="$CPS1"
+        #RPS1="$CRPS1"
+        ;;
+esac
 
 # }}}
 # {{{ Autocompletion Settings
