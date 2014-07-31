@@ -300,5 +300,6 @@ zstyle ':completion:*:*:*:users' ignored-patterns \
 #zstyle ':completion:*:ssh:*' group-order hosts-domain hosts-host users hosts-ipaddr
 #zstyle '*' single-ignored show
 
-######################################## COMPLETION (end)
+# }}}
 
+# vim: set foldmethod=marker:
