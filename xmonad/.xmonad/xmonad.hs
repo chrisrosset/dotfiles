@@ -48,7 +48,7 @@ myFocusedBorderColor = "#ff0000"
 
 -- modMask lets you specify which modkey you want to use. The default
 -- mod1Mask is "left alt", mod3Mask is "right alt" and mod4Mask is "super".
-myModMask       = mod1Mask
+myModMask       = mod4Mask
 
 -- The default number of workspaces (virtual screens) and their names.
 -- By default we use numeric strings, but any string may be used as a
@@ -143,7 +143,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     ] ++ concat [musicKeys, wsSwitch, scrSwitch]
     where
         cmusCmd :: MonadIO m => KeySym -> String -> ((KeyMask, KeySym), m ())
-        cmusCmd k c = ((mod4Mask, k), spawn $ "cmus-remote -C '" ++ c ++ "'")
+        cmusCmd k c = ((mod1Mask .|. mod4Mask, k), spawn $ "cmus-remote -C '" ++ c ++ "'")
 
         cmusPairs = [ (xK_KP_Home     , "seek -60")
                     , (xK_KP_Page_Up  , "seek +60")
