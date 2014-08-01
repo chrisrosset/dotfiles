@@ -1,3 +1,8 @@
+emacs/.emacs.d/auto-save-list
+emacs/.emacs.d/backup-files/*
+emacs/.emacs.d/elpa/*
+emacs/.emacs.d/eshell/*
+emacs/.emacs.d/tramp
 vim/.viminfo
 vim/.vim/bundle/*
 vim/.vim/undo/*

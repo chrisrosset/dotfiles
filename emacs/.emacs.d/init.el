@@ -73,6 +73,10 @@
 (setq-default tab-width 4)
 (setq indent-line-function 'insert-tab)
 
+;; backup files' settings
+(setq backup-directory-alist '(("." . "~/.emacs.d/backup-files")))
+(setq backup-by-copying t)
+
 (fset 'yes-or-no-p 'y-or-n-p)
 
 (with-library recentf ; recently open files
