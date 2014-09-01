@@ -22,7 +22,9 @@
     magit
     rainbow-delimiters
     smartparens
+    switch-window
     undo-tree
+    window-numbering
     yasnippet))
 
 (require 'package)

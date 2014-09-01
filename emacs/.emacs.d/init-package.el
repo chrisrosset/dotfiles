@@ -32,11 +32,20 @@
 (with-library smartparens
   (require 'smartparens-config)
   (smartparens-global-mode t))
+;; switch-window
+;; - switch between windows using window numbers
+(with-library switch-window
+  (global-set-key (kbd "C-x o") 'switch-window))
 
 ;; undo-tree
 ;; - vim-like undo and redo functionality
 (with-library undo-tree
   (global-undo-tree-mode))
+
+;; window-numbering
+;; - display windows' numbers in the status line (useful with switch-window)
+(with-library window-numbering
+  (window-numbering-mode))
 
 ;; yasnippet
 ;; - defining and expanding snippets
