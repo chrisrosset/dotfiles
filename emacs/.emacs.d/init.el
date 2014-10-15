@@ -24,6 +24,7 @@
     smartparens
     switch-window
     undo-tree
+    windmove
     window-numbering
     yasnippet))
 

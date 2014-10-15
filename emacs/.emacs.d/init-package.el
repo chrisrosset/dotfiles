@@ -42,6 +42,11 @@
 (with-library undo-tree
   (global-undo-tree-mode))
 
+;; windmove
+;; - keybindings for moving between adjacent windows
+(with-library windmove
+  (windmove-default-keybindings))
+
 ;; window-numbering
 ;; - display windows' numbers in the status line (useful with switch-window)
 (with-library window-numbering
