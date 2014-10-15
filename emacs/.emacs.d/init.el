@@ -100,7 +100,7 @@
 (global-set-key (kbd "C-c r") 'recentf-open-files)
 (global-set-key (kbd "C-c /") 'comment-or-uncomment-region)
 (global-set-key (kbd "C-c f") 'ff-find-other-file)
-(global-set-key (kbd "C-c c") (lambda ()
+(global-set-key (kbd "C-c b") (lambda ()
                                 (interactive)
                                 (pop-to-buffer "*compilation*")
                                 (compile (read-string "Compile command: " compile-command))))
