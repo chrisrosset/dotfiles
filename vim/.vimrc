@@ -205,36 +205,39 @@ cmap w!!! w !sudo tee % > /dev/null
 " {{{ Plugins and Plugin Settings
 
 try
-    set rtp+=~/.vim/bundle/vundle/
-    call vundle#rc()
-    Bundle 'gmarik/vundle'
+    set nocompatible " required
+    filetype off     " required
+    
+    set rtp+=~/.vim/bundle/Vundle.vim/
+    call vundle#begin()
+    Plugin 'gmarik/Vundle.vim'
 
-    Bundle 'tpope/vim-fugitive'
-    Bundle 'tpope/vim-surround'
-    Bundle 'Raimondi/delimitMate'
-    Bundle 'Lokaltog/vim-easymotion'
-    "Bundle 'vim-scripts/SearchComplete'
-    Bundle 'scrooloose/nerdcommenter'
-    Bundle 'mbbill/undotree'
-    Bundle 'benmills/vimux'
-    Bundle 'kien/ctrlp.vim'
+    Plugin 'tpope/vim-fugitive'
+    Plugin 'tpope/vim-surround'
+    Plugin 'Raimondi/delimitMate'
+    Plugin 'Lokaltog/vim-easymotion'
+    "Plugin 'vim-scripts/SearchComplete'
+    Plugin 'scrooloose/nerdcommenter'
+    Plugin 'mbbill/undotree'
+    Plugin 'benmills/vimux'
+    Plugin 'kien/ctrlp.vim'
 
-    Bundle 'derekwyatt/vim-fswitch'
+    Plugin 'derekwyatt/vim-fswitch'
     nnoremap <leader>fsh :FSSplitLeft<CR>
     nnoremap <leader>fsj :FSSplitBelow<CR>
     nnoremap <leader>fsk :FSSplitAbove<CR>
     nnoremap <leader>fsl :FSSplitRight<CR>
 
-    Bundle 'majutsushi/tagbar'
+    Plugin 'majutsushi/tagbar'
     nmap <F8> :TagbarToggle<CR>
 
-    Bundle 'luochen1990/rainbow'
+    Plugin 'luochen1990/rainbow'
     let g:rainbow_active = 1
 
-    Bundle 'mhinz/vim-startify'
+    Plugin 'mhinz/vim-startify'
     let g:startify_bookmarks = [ '~/.vimrc', '~/.zshrc' ]
 
-    Bundle 'bling/vim-airline'
+    Plugin 'bling/vim-airline'
     set laststatus=2
     let g:custom_status_line = 1
     let g:airline#extensions#tabline#enabled = 1
@@ -245,12 +248,19 @@ try
     endif
 
     " snipMate
-    Bundle 'MarcWeber/vim-addon-mw-utils'
-    Bundle 'tomtom/tlib_vim'
-    Bundle 'garbas/vim-snipmate'
-    Bundle 'honza/vim-snippets'
+    Plugin 'MarcWeber/vim-addon-mw-utils'
+    Plugin 'tomtom/tlib_vim'
+    Plugin 'garbas/vim-snipmate'
+    Plugin 'honza/vim-snippets'
+
+    " All of your Plugins must be added before the following line
+    call vundle#end()         " required
+    filetype plugin indent on " required
+
 catch
     echo "Vundle not installed or incorrectly initialized."
+    echo "To install run:"
+    echo "git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim"
 endtry
 
 " }}}
