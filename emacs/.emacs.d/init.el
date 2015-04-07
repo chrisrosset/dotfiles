@@ -21,6 +21,7 @@
     haskell-mode
     magit
     rainbow-delimiters
+    smart-mode-line
     smartparens
     switch-window
     undo-tree

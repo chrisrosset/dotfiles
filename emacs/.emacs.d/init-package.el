@@ -27,6 +27,12 @@
 (with-library rainbow-delimiters
   (global-rainbow-delimiters-mode))
 
+;; smart-mode-line
+;; - Vim's Powerline, now in Emacs!
+(with-library smart-mode-line
+  (sml/setup)
+  (sml/apply-theme 'dark))
+
 ;; smartparents
 ;; - smart handling of parentheses
 (with-library smartparens
