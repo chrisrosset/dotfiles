@@ -4,6 +4,8 @@
 
 ;; Form for executing code only if a particular library is available
 (defmacro with-library (symbol &rest body)
+  "Run the body if (require symbol) succeeds."
+  (declare (indent defun))
   `(if (require ',symbol nil t)
       (progn
         ,@body)
