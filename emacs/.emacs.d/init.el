@@ -30,7 +30,6 @@
     magit
     rainbow-delimiters
     smart-mode-line
-    smartparens
     switch-window
     undo-tree
     windmove
@@ -50,7 +49,6 @@
       (package-install pkg))))
 
 (load-file "~/.emacs.d/init-package.el")
-
 
 ;;;; Visual Settings
 
@@ -73,6 +71,8 @@
 
 
 ;;;; General Settings
+
+(electric-pair-mode)
 
 (setq x-select-enable-clipboard t)
 (setq x-select-enable-primary t)

@@ -43,11 +43,6 @@
   (sml/setup)
   (sml/apply-theme 'dark))
 
-;; smartparents
-;; - smart handling of parentheses
-(with-library smartparens
-  (require 'smartparens-config)
-  (smartparens-global-mode t))
 ;; switch-window
 ;; - switch between windows using window numbers
 (with-library switch-window
