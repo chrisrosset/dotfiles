@@ -4,7 +4,6 @@
 
 ;; evil
 ;; - vi emulation mode
-(setq evil-want-C-u-scroll t)
 (with-library evil
   (loop for (mode . state) in '((git-commit-mode . insert)
                                 (git-rebase-mode . emacs)
