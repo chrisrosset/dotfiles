@@ -3,7 +3,6 @@ OPTIONS=autodig
 OPTIONS=!autopickup
 OPTIONS=autoquiver
 OPTIONS=color
-OPTIONS=paranoid_hit
 OPTIONS=time
 
 # Compound optins
