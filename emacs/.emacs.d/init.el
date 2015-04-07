@@ -1,5 +1,10 @@
 ;; Emacs initialization file
 
+; move Custom settings to a separate file
+(setq custom-file "~/.emacs.d/init-custom.el")
+(load custom-file 'noerror)
+
+
 ;;;; Plugin / package setup
 
 ;; Form for executing code only if a particular library is available
@@ -67,10 +72,6 @@
 
 
 ;;;; General Settings
-
-; move Custom settings to a separate file
-(setq custom-file "~/.emacs.d/init-custom.el")
-(load custom-file 'noerror)
 
 (setq x-select-enable-clipboard t)
 (setq x-select-enable-primary t)
