@@ -17,6 +17,17 @@
 (with-library fiplr
   (global-set-key (kbd "C-x f") 'fiplr-find-file))
 
+(with-library helm-config
+  (setq helm-split-window-in-side-p t)
+  (setq helm-ff-file-name-history-use-recentf t)
+  (setq helm-M-x-fuzzy-match t)
+  (setq helm-buffers-fuzzy-matching t)
+  (global-set-key (kbd "M-x")     'helm-M-x)
+  (global-set-key (kbd "C-x C-f") 'helm-find-files)
+  (global-set-key (kbd "C-x C-r") 'helm-recentf)
+  (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
+  (helm-mode 1))
+
 ;; magit
 (with-library magit
   (global-set-key (kbd "C-c m") 'magit-status))

@@ -26,6 +26,7 @@
   '(evil
     fiplr
     haskell-mode
+    helm
     magit
     rainbow-delimiters
     smart-mode-line
