@@ -2,6 +2,39 @@
 ;;
 ;; This file is used for initializing package specific settings.
 
+(defun settings/packages-installed-p ()
+  (require 'cl)
+  (loop for pkg in settings/packages
+        when (not (package-installed-p pkg)) do (return nil)
+        finally (return t)))
+
+(defvar settings/packages
+  '(evil
+    fiplr
+    haskell-mode
+    helm
+    magit
+    monokai-theme
+    rainbow-delimiters
+    smart-mode-line
+    switch-window
+    undo-tree
+    windmove
+    window-numbering
+    yasnippet))
+
+(with-library package
+  ;(add-to-list 'package-archives '("melpa"     . "http://melpa.org/packages/")  t)
+  ;(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
+  (package-initialize)
+  (unless (settings/packages-installed-p)
+    (message "%s" "Refreshing package database...")
+    (package-refresh-contents)
+    (dolist (pkg settings/packages)
+      (when (not (package-installed-p pkg))
+        (package-install pkg)))))
+
+
 ;; evil
 ;; - vi emulation mode
 (with-library evil
@@ -29,8 +62,14 @@
   (helm-mode 1))
 
 ;; magit
+;; - magical git interface
 (with-library magit
   (global-set-key (kbd "C-c m") 'magit-status))
+
+;; monokai-theme
+;; - sublime-like theme
+(with-library monokai-theme
+  (load-theme 'monokai t))
 
 ;; rainbow-delimiters
 ;; - colorize pairs of brackets with different colors

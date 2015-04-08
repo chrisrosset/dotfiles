@@ -1,11 +1,10 @@
 ;; Emacs initialization file
 
-; move Custom settings to a separate file
+;; move Custom settings to a separate file
 (setq custom-file "~/.emacs.d/init-custom.el")
 (load custom-file 'noerror)
 
-
-;;;; Plugin / package setup
+;; Plugin / package setup
 
 ;; Form for executing code only if a particular library is available
 (defmacro with-library (symbol &rest body)
@@ -16,44 +15,9 @@
         ,@body)
     (message (format "%s is not available." ',symbol))))
 
-(defun settings/packages-installed-p ()
-  (require 'cl)
-  (loop for pkg in settings/packages
-        when (not (package-installed-p pkg)) do (return nil)
-        finally (return t)))
-
-(defvar settings/packages
-  '(evil
-    fiplr
-    haskell-mode
-    helm
-    magit
-    rainbow-delimiters
-    smart-mode-line
-    switch-window
-    undo-tree
-    windmove
-    window-numbering
-    yasnippet))
-
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
-(package-initialize)
-
-(unless (settings/packages-installed-p)
-  (message "%s" "Refreshing package database...")
-  (package-refresh-contents)
-  (dolist (pkg settings/packages)
-    (when (not (package-installed-p pkg))
-      (package-install pkg))))
-
 (load-file "~/.emacs.d/init-package.el")
 
 ;;;; Visual Settings
-
-(with-library monokai-theme
-  (load-theme 'monokai t))
 
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-message t)
