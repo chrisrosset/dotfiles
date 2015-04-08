@@ -10,6 +10,7 @@
 
 (defvar settings/packages
   '(evil
+    evil-surround
     fiplr
     haskell-mode
     helm
@@ -43,7 +44,10 @@
                                 (term-mode . emacs))
         do (evil-set-initial-state mode state))
   (define-key evil-motion-state-map (kbd "RET" ) nil)
-  (evil-mode 1))
+  (evil-mode 1)
+
+  (with-library evil-surround
+    (global-evil-surround-mode 1)))
 
 ;; fiplr
 ;; - fuzzy file search within version control
