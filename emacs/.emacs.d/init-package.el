@@ -38,12 +38,14 @@
 
 ;; evil
 ;; - vi emulation mode
+(setq evil-want-C-u-scroll t)
 (with-library evil
   (loop for (mode . state) in '((git-commit-mode . insert)
                                 (git-rebase-mode . emacs)
                                 (term-mode . emacs))
         do (evil-set-initial-state mode state))
   (define-key evil-motion-state-map (kbd "RET" ) nil)
+  (define-key evil-normal-state-map (kbd "SPC u") 'universal-argument)
   (evil-mode 1)
 
   (with-library evil-surround
