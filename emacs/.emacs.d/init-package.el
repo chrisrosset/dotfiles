@@ -59,6 +59,7 @@
   (setq helm-ff-file-name-history-use-recentf t)
   (setq helm-M-x-fuzzy-match t)
   (setq helm-buffers-fuzzy-matching t)
+  (setq helm-buffer-max-length 40)
   (global-set-key (kbd "M-x")     'helm-M-x)
   (global-set-key (kbd "C-x C-f") 'helm-find-files)
   (global-set-key (kbd "C-x C-r") 'helm-recentf)
