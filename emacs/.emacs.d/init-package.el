@@ -112,5 +112,7 @@
 ;; yasnippet
 ;; - defining and expanding snippets
 (with-library yasnippet
-  (yas-global-mode 1))
+  (yas-global-mode 1)
+  (add-hook 'term-mode-hook (lambda()
+                              (yas-minor-mode -1))))
 
