@@ -40,11 +40,11 @@ myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True
 
 -- Width of the window border in pixels.
-myBorderWidth   = 2
+myBorderWidth   = 1
 
 -- Border colors for unfocused and focused windows, respectively.
-myNormalBorderColor  = "#aaaaaa"
-myFocusedBorderColor = "#ff0000"
+myNormalBorderColor  = "#333333"
+myFocusedBorderColor = "#bbbbbb"
 
 -- modMask lets you specify which modkey you want to use. The default
 -- mod1Mask is "left alt", mod3Mask is "right alt" and mod4Mask is "super".
