@@ -238,14 +238,14 @@ zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' list-prompt '%SAt %p: Hit TAB for more, or the character to insert%s'
 zstyle ':completion:*' menu select=1 _complete _ignored _approximate
-zstyle -e ':completion:*:approximate:*' max-errors \
-    'reply=( $(( ($#PREFIX+$#SUFFIX)/2 )) numeric )'
 zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
-
-# Completion Styles
 
 # list of completers to use
 zstyle ':completion:*::::' completer _expand _complete _ignored _approximate
+
+# show autocomplete even when there's a match for the current input
+# http://unix.stackexchange.com/questions/97692/make-zsh-show-autocomplete-choices-even-when-a-possible-match-is-entered
+zstyle ':completion:*' accept-exact false
 
 # allow one error for every three characters typed in approximate completer
 zstyle -e ':completion:*:approximate:*' max-errors \
