@@ -62,7 +62,9 @@
 (with-library tramp
   (setq tramp-terminal-type "dumb"))
 
-
+(setq confirm-kill-emacs '(lambda (prompt)
+                            (or (equal 1 (length (frame-list)))
+                                (yes-or-no-p (concat "Multiple frames open. " prompt)))))
 ;;;; General Keybindings
 
 (global-set-key (kbd "RET") 'newline-and-indent)
