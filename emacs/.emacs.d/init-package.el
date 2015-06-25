@@ -71,6 +71,7 @@
 ;; magit
 ;; - magical git interface
 (with-library magit
+  (setq magit-last-seen-setup-instructions "1.4.0")
   (global-set-key (kbd "C-c m") 'magit-status))
 
 ;; monokai-theme
@@ -81,7 +82,7 @@
 ;; rainbow-delimiters
 ;; - colorize pairs of brackets with different colors
 (with-library rainbow-delimiters
-  (global-rainbow-delimiters-mode))
+  (rainbow-delimiters-mode))
 
 ;; smart-mode-line
 ;; - Vim's Powerline, now in Emacs!
