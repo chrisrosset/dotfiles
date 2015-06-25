@@ -140,34 +140,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((mod4Mask, xK_x), spawn myFileManager)
     , ((mod4Mask, xK_c), kill)
 
-    ] ++ concat [musicKeys, wsSwitch, scrSwitch]
+    ] ++ concat [wsSwitch, scrSwitch]
     where
-        cmusCmd :: MonadIO m => KeySym -> String -> ((KeyMask, KeySym), m ())
-        cmusCmd k c = ((mod1Mask .|. mod4Mask, k), spawn $ "cmus-remote -C '" ++ c ++ "'")
-
-        cmusPairs = [ (xK_KP_Home     , "seek -60")
-                    , (xK_KP_Page_Up  , "seek +60")
-                    , (xK_KP_Left     , "seek -30")
-                    , (xK_KP_Begin    , "player-pause")
-                    , (xK_KP_Right    , "seek +30")
-                    , (xK_KP_End      , "seek -5")
-                    , (xK_KP_Page_Down, "seek +5")
-                    -- hjkl
-                    , (xK_y           , "seek -60")
-                    , (xK_o           , "seek +60")
-                    , (xK_h           , "seek -30")
-                    , (xK_l           , "seek +30")
-                    , (xK_n           , "seek -5")
-                    , (xK_period      , "seek +5")
-                    , (xK_u           , "player-prev")
-                    , (xK_i           , "player-next")
-                    , (xK_m           , "vol -5%")
-                    , (xK_comma       , "vol +5%")
-                    , (xK_j           , "player-pause")
-                    ]
-
-        musicKeys = map (uncurry cmusCmd) cmusPairs
-
         -- mod-shift-[1..9], Move client to workspace N
         wsSwitch = [((m .|. modm, k), windows $ f i)
                    | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
