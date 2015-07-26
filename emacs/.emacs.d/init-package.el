@@ -16,7 +16,18 @@
 
 (eval-when-compile
     (setq use-package-always-ensure t)
-    (require 'use-package))
+    (require 'use-package)
+    (require 'bind-key))
+
+;; avy
+;; - fast jumping around txt using labels
+(use-package avy
+  :bind (("C-c a j" . avy-goto-line)
+         ("C-c a k" . avy-goto-line)
+         ("C-c a w" . avy-goto-word-1)
+         ("C-c a e" . avy-goto-word-1)
+         ("C-c a h" . avy-goto-char-2)
+         ("C-c a l" . avy-goto-char-2)))
 
 ;; evil
 ;; - vi emulation mode
