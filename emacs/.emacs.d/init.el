@@ -6,15 +6,6 @@
 
 ;; Plugin / package setup
 
-;; Form for executing code only if a particular library is available
-(defmacro with-library (symbol &rest body)
-  "Run the body if (require symbol) succeeds."
-  (declare (indent defun))
-  `(if (require ',symbol nil t)
-      (progn
-        ,@body)
-    (message (format "%s is not available." ',symbol))))
-
 (load-file "~/.emacs.d/init-package.el")
 
 ;;;; Visual Settings
@@ -55,13 +46,13 @@
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
-(with-library recentf ; recently open files
+(use-package recentf ; recently open files
+  :config
   (recentf-mode t)
   (setq recentf-max-saved-items 500)
   (setq recentf-max-menu-items 25))
 
-(with-library tramp
-  (setq tramp-terminal-type "dumb"))
+(setq tramp-terminal-type "dumb")
 
 (setq confirm-kill-emacs '(lambda (prompt)
                             (or (equal 1 (length (frame-list)))
@@ -84,7 +75,8 @@
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode)) ; treat .h files as C++
 (setq compilation-scroll-output 'first-error)
 
-(with-library cc-mode
+(use-package cc-mode
+  :config
   (c-add-style "mycppstyle"
                '((c-basic-offset . 4)
                  (c-comment-only-line-offset . 0)
