@@ -53,6 +53,14 @@
   :config
   (global-set-key (kbd "C-x f") 'fiplr-find-file))
 
+(use-package flx-ido
+  :config
+  (ido-mode 1)
+  (ido-everywhere 1)
+  (flx-ido-mode 1)
+  (setq ido-use-faces nil) ; disable ido faces to see flx highlights.
+  (setq ido-enable-flex-matching t))
+
 (use-package helm
   :init
   (require 'helm-config)
@@ -81,6 +89,12 @@
 (use-package monokai-theme
   :config
   (load-theme 'monokai t))
+
+;; projectile
+;; - indexing and searching engine
+(use-package projectile
+  :config
+  (setq projectile-indexing-method 'native))
 
 ;; rainbow-delimiters
 ;; - colorize pairs of brackets with different colors
