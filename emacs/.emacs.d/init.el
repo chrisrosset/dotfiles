@@ -29,6 +29,8 @@
 
 (electric-pair-mode)
 
+(setq ediff-split-window-function 'split-window-horizontally)
+
 (setq x-select-enable-clipboard t)
 (setq x-select-enable-primary t)
 (setq mouse-drag-copy-region t)
