@@ -39,7 +39,8 @@
   (define-key evil-normal-state-map (kbd "SPC u") 'universal-argument)
   (add-hook 'with-editor-mode-hook 'evil-insert-state)
   (let (mode)
-    (dolist (mode '((term-mode . emacs)))
+    (dolist (mode '((term-mode . emacs)
+                    (git-timemachine-mode . emacs)))
             (evil-set-initial-state (car mode) (cdr mode))))
   (evil-mode 1))
 
@@ -60,6 +61,14 @@
   (flx-ido-mode 1)
   (setq ido-use-faces nil) ; disable ido faces to see flx highlights.
   (setq ido-enable-flex-matching t))
+
+(use-package git-timemachine
+  :config
+  (defadvice git-timemachine-mode (after toggle-evil activate)
+    ; "Turn off `evil-local-mode' when enabling
+    ; `git-timemachine-mode', and turn it back on when disabling
+    ; `git-timemachine-mode'."
+    (evil-local-mode (if git-timemachine-mode -1 1))))
 
 (use-package helm
   :init
