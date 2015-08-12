@@ -91,6 +91,7 @@
   :init
   (setq magit-last-seen-setup-instructions "1.4.0")
   :config
+  (setq magit-status-buffer-switch-function 'switch-to-buffer)
   (global-set-key (kbd "C-c m") 'magit-status))
 
 ;; monokai-theme
