@@ -27,6 +27,9 @@
 
 ;;;; General Settings
 
+(server-start)
+(setenv "EDITOR" "emacsclient")
+
 (electric-pair-mode)
 
 (setq ediff-split-window-function 'split-window-horizontally)
