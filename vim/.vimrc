@@ -84,7 +84,7 @@ set clipboard^=unnamed
 
 " syntax based folds and opening all folds on loading a file
 set foldmethod=syntax
-autocmd BufRead * normal zR
+set foldlevelstart=20
 
 " search settings
 set ignorecase   " Default to using case insensitive searches,
