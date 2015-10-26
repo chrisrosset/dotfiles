@@ -51,8 +51,8 @@
 (use-package recentf ; recently open files
   :config
   (recentf-mode t)
-  (setq recentf-max-saved-items 500)
-  (setq recentf-max-menu-items 25))
+  (setq recentf-max-saved-items 10000)
+  (setq recentf-max-menu-items 40))
 
 (setq tramp-terminal-type "dumb")
 
