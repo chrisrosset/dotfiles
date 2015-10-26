@@ -55,6 +55,11 @@ if CommandAvailable git; then
     alias gd='git diff'
     alias gl='git log'
     alias gs='git status'
+    
+    alias git-this-branch='git symbolic-ref --short HEAD'
+    alias git-last-message='git log --pretty=%B -1'
+    alias git-last-subject='git log --pretty=%s -1'
+    alias git-last-body='git log --pretty=%b -1'
 fi
 
 if CommandAvailable "singleton.sh"; then
