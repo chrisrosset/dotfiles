@@ -41,29 +41,6 @@ function BackupZshHistoryFile()
 # }}}
 # {{{ Keybindings
 
-#bindkey "\e[1~" beginning-of-line
-#bindkey "e[4~" end-of-line
-#bindkey "e[5~" beginning-of-history
-#bindkey "e[6~" end-of-history
-#bindkey "e[3~" delete-char
-#bindkey "e[2~" quoted-insert
-#bindkey "e[5C" forward-word
-bindkey "5A" history-incremental-search-backward
-bindkey "5B" history-incremental-search-forward
-bindkey "5C" forward-word
-bindkey -e '5C' emacs-forward-word
-bindkey "5D" backward-word
-bindkey -e '5D' emacs-backward-word
-bindkey ";5A" history-incremental-search-backward
-bindkey ";5B" history-incremental-search-forward
-bindkey ";5C" forward-word
-bindkey ";5D" backward-word
-
-#bindkey "eOd" emacs-backward-word
-#bindkey "ee[C" forward-word
-#bindkey "ee[D" backward-word
-#bindkey "OH" beginning-of-line
-
 if [[ "$TERM" != emacs ]]; then
 [[ -z "$terminfo[kdch1]" ]] || bindkey -M emacs "$terminfo[kdch1]" delete-char
 [[ -z "$terminfo[khome]" ]] || bindkey -M emacs "$terminfo[khome]" beginning-of-line
