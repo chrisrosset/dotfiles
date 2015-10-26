@@ -13,6 +13,9 @@ fi
 ZSHDIR="$HOME/.zsh"
 [ -d "$ZSHDIR" ] || mkdir "$ZSHDIR"
 
+# load z
+[ -e "$ZSHDIR/z/z.sh" ] && . "$ZSHDIR"/z/z.sh
+
 HISTFILE="$ZSHDIR/zhistory"
 HISTSIZE=100000
 SAVEHIST=100000
