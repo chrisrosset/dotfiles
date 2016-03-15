@@ -27,6 +27,10 @@
 
 ;;;; General Settings
 
+(setq initial-scratch-message
+      (concat ";; Excuse me sir, do you have a moment to talk about our Lord,\n"
+              ";; Savior, and the one true operating system, GNU Emacs?\n\n"))
+
 (server-start)
 (setenv "EDITOR" "emacsclient")
 
