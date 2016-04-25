@@ -85,6 +85,13 @@
   (global-set-key (kbd "C-x b")   'helm-buffers-list)
   (helm-mode 1))
 
+;; js2-mode
+;; - better javascript mode
+(use-package js2-mode
+  :config
+  (setq js2-basic-offset 4)
+  (add-hook 'js-mode-hook 'js2-minor-mode))
+
 ;; magit
 ;; - magical git interface
 (use-package magit
