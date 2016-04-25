@@ -19,8 +19,6 @@ ZSHDIR="$HOME/.zsh"
 HISTFILE="$ZSHDIR/zhistory"
 HISTSIZE=100000
 SAVEHIST=100000
-PAGER='less'
-EDITOR="vim"
 
 # stop backwards-delete-word at '=', '.', '/', '_' and '-' characters
 WORDCHARS=$(echo "$WORDCHARS" | sed "s/[=./_-]//g")

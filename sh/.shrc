@@ -24,6 +24,7 @@ CommandAvailable()
 # }}}
 # {{{ PATH Manipulation
 
+PrefixPATH "/opt/node/bin"
 PrefixPATH "/opt/administration/scripts-general"
 PrefixPATH "${HOME}/.cabal/bin"
 PrefixPATH "${HOME}/bin"
@@ -71,6 +72,8 @@ fi
 # {{{ Global Variables
 
 [ -n "$HOSTNAME" ] || export HOSTNAME="`hostname`"
+[ -n "$EDITOR" ] || export EDITOR="vim"
+[ -n "$PAGER" ] || export PAGER="less"
 
 # }}}
 # {{{ Miscellaneous
