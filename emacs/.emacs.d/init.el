@@ -72,6 +72,7 @@
 (global-set-key (kbd "C-c r") 'recentf-open-files)
 (global-set-key (kbd "C-c /") 'comment-or-uncomment-region)
 (global-set-key (kbd "C-c f") 'ff-find-other-file)
+(global-set-key (kbd "C-c t") 'toggle-truncate-lines)
 (global-set-key (kbd "C-c b") (lambda ()
                                 (interactive)
                                 (pop-to-buffer "*compilation*")
