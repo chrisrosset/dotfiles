@@ -19,6 +19,13 @@
     (require 'use-package)
     (require 'bind-key))
 
+;; ace-window
+;; - jump to/act on other windows quickly
+(use-package ace-window
+  :config
+  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+  (global-set-key (kbd "C-x o") 'ace-window))
+
 ;; ag
 ;; - Silver Searcher
 (use-package ag
@@ -138,12 +145,6 @@
   :config
   (sml/setup)
   (sml/apply-theme 'dark))
-
-;; switch-window
-;; - switch between windows using window numbers
-(use-package switch-window
-  :config
-  (global-set-key (kbd "C-x o") 'switch-window))
 
 ;; undo-tree
 ;; - vim-like undo and redo functionality
