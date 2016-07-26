@@ -19,6 +19,11 @@
     (require 'use-package)
     (require 'bind-key))
 
+;; ag
+;; - Silver Searcher
+(use-package ag
+  :bind (("C-c a g" . ag)))
+
 ;; avy
 ;; - fast jumping around txt using labels
 (use-package avy
