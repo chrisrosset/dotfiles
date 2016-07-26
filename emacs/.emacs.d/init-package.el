@@ -49,6 +49,13 @@
             (evil-set-initial-state (car mode) (cdr mode))))
   (evil-mode 1))
 
+;; evil-anzu
+;; - display current match and the total number of matches in the modeline
+(use-package evil-anzu
+  :config
+  (global-anzu-mode))
+
+
 (use-package evil-surround
   :config
   (global-evil-surround-mode 1))
