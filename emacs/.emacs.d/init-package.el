@@ -102,8 +102,9 @@
 (use-package magit
   :init
   (setq magit-last-seen-setup-instructions "1.4.0")
+  ;; https://github.com/magit/magit/issues/2388
+  (setq magit-diff-expansion-threshold 999.0)
   :config
-  (setq magit-status-buffer-switch-function 'switch-to-buffer)
   (global-set-key (kbd "C-c m") 'magit-status))
 
 ;; monokai-theme
