@@ -1,5 +1,10 @@
 ;; Emacs initialization file
 
+;; Reduce the frequency of garbage collection by making it happen on
+;; each 100MB of allocated data (the default is on every 0.76MB).
+;; This reduces the startup time.
+(setq gc-cons-threshold 100000000)
+
 ;; move Custom settings to a separate file
 (setq custom-file "~/.emacs.d/init-custom.el")
 (load custom-file 'noerror)
