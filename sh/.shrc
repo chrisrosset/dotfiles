@@ -24,9 +24,6 @@ CommandAvailable()
 # }}}
 # {{{ PATH Manipulation
 
-PrefixPATH "/opt/node/bin"
-PrefixPATH "/opt/administration/scripts-general"
-PrefixPATH "${HOME}/.cabal/bin"
 PrefixPATH "${HOME}/bin"
 PrefixPATH "${HOME}/arch/`uname -s`/bin"
 
@@ -38,8 +35,7 @@ alias l='ls'
 alias ll='ls -lh --color=auto'
 alias lll='ls -lah --color=auto'
 alias cd..='cd ..'
-alias nano='vim'
-alias vi='vim'
+alias vi=$(which vim)
 alias cl='clear'
 alias cpr='rsync --archive --verbose --progress --stats'
 
@@ -56,24 +52,25 @@ if CommandAvailable git; then
     alias gd='git diff'
     alias gl='git log'
     alias gs='git status'
-    
+
     alias git-this-branch='git symbolic-ref --short HEAD'
     alias git-last-message='git log --pretty=%B -1'
     alias git-last-subject='git log --pretty=%s -1'
     alias git-last-body='git log --pretty=%b -1'
 fi
 
-if CommandAvailable "singleton.sh"; then
-    CommandAvailable cmus && alias cmus='singleton.sh cmus'
-    CommandAvailable rtorrent && alias rtorrent='singleton.sh rtorrent'
-fi
-
 # }}}
 # {{{ Global Variables
 
 [ -n "$HOSTNAME" ] || export HOSTNAME="`hostname`"
-[ -n "$EDITOR" ] || export EDITOR="vim"
 [ -n "$PAGER" ] || export PAGER="less"
+#[ -n "$EDITOR" ] || export EDITOR="vim"
+
+if CommandAvailable emacsclient; then
+    export EDITOR=emacsclient -nw -a vi
+else
+    export EDITOR=vi
+fi
 
 # }}}
 # {{{ Miscellaneous
