@@ -135,12 +135,6 @@ bindkey '^x^e' edit-command-line
 
 # {{{ Global Variables
 
-if [ -d "/opt/administration" ]; then
-	source "/opt/administration/library.sh"
-	TZ=`get_host_info 'TZ' 'Europe/London'`
-fi
-
-
 #LC_ALL='en_US.UTF-8'
 #LANG='en_US.UTF-8'
 
