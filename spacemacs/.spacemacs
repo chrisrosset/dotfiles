@@ -328,6 +328,9 @@ you should place your code here."
   ;; https://github.com/NixOS/nix/issues/828
   (setq spacemacs-indent-sensitive-modes (add-to-list 'spacemacs-indent-sensitive-modes 'nix-mode))
 
+  ;; https://github.com/syl20bnr/spacemacs/issues/10064
+  (spacemacs/toggle-highlight-current-line-globally-off)
+
   )
 
 (setq custom-file "~/.emacs.d/init-custom.el")
