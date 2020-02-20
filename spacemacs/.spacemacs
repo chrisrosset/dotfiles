@@ -42,6 +42,7 @@ values."
      emacs-lisp
      finance
      git
+     graphviz
      haskell
      helm
      html
@@ -49,7 +50,7 @@ values."
      markdown
      python
      racket
-     ;; org
+     org
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
@@ -305,7 +306,7 @@ values."
    ;; `trailing' to delete only the whitespace at end of lines, `changed'to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
-   dotspacemacs-whitespace-cleanup nil
+   dotspacemacs-whitespace-cleanup "changed"
    ))
 
 (defun dotspacemacs/user-init ()
@@ -330,6 +331,12 @@ you should place your code here."
 
   ;; https://github.com/syl20bnr/spacemacs/issues/10064
   (spacemacs/toggle-highlight-current-line-globally-off)
+
+  ;; https://out-of-cheese-error.netlify.com/spacemacs-config
+  (setq org-startup-indented t)
+
+  ;; https://github.com/luxbock/graphviz/issues/1
+  (setq default-tab-width 4)
 
   )
 
