@@ -338,6 +338,10 @@ you should place your code here."
   ;; https://github.com/luxbock/graphviz/issues/1
   (setq default-tab-width 4)
 
+  (add-hook 'org-mode-hook (lambda ()
+                             "Enable spell-checking in Org buffers."
+                             (flyspell-mode t)))
+
   )
 
 (setq custom-file "~/.emacs.d/init-custom.el")
