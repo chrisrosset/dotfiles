@@ -48,9 +48,18 @@ values."
      html
      javascript
      markdown
+     (org :variables
+          ;; https://emacs.stackexchange.com/questions/12517/how-do-i-make-the-timespan-shown-by-org-agenda-start-yesterday
+          org-agenda-start-on-weekday nil
+          org-agenda-start-day "-1"
+          org-agenda-span 30
+
+          ;; https://out-of-cheese-error.netlify.com/spacemacs-config
+          org-startup-indented t
+
+          org-src-preserve-indentation t)
      python
      racket
-     org
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
@@ -331,9 +340,6 @@ you should place your code here."
 
   ;; https://github.com/syl20bnr/spacemacs/issues/10064
   (spacemacs/toggle-highlight-current-line-globally-off)
-
-  ;; https://out-of-cheese-error.netlify.com/spacemacs-config
-  (setq org-startup-indented t)
 
   ;; https://github.com/luxbock/graphviz/issues/1
   (setq default-tab-width 4)
