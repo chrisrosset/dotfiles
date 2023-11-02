@@ -1,3 +1,4 @@
+doom/custom.el
 emacs/.emacs.d/auto-save-list
 emacs/.emacs.d/backup-files/*
 emacs/.emacs.d/elpa/*
