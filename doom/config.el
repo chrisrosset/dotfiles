@@ -138,16 +138,9 @@ Using this in org-agenda-prefix-format you can get this:
 
   (setq org-agenda-prefix-format
         '((agenda . " %i %(ctr/org-agenda-category)%?-12t %s %(ctr/org-agenda-todo-padding)")
-          (todo   . " %i %-12:c")
-          (tags   . " %i %-12:c")
-          (search . " %i %-12:c")))
-
-
-  ;(setq org-agenda-prefix-format '((agenda . " %(agenda-cat)%?-12t %-12s %(org-get-full-item-name)")
-  ;; (setq org-agenda-prefix-format '((agenda . " %i %i %-12s %(org-get-full-item-name)")
-  ;;                                  (todo   . " %-7:(agenda-cat)%?-12t %(org-get-full-item-name)")
-  ;;                                  (tags   . " %i %-12:c %b")
-  ;;                                  (search . " %-7:(agenda-cat)%?-12t %(org-get-full-item-name)")))
+          (todo   . " %i %(ctr/org-agenda-category)")
+          (tags   . " %i %(ctr/org-agenda-category)")
+          (search . " %i %(ctr/org-agenda-category)")))
 
   ) ; org / org-roam
 
