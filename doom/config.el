@@ -33,11 +33,39 @@
   :init
 
   :config
+  (setq org-directory "~/org")
+  (setq org-ellipses "…")
   (setq org-log-done "time")
   (setq org-log-done-with-time t)
-  (setq org-directory "~/org")
+
+  ;; Logging notes with `org-add-note' will save them in the :LOGBOOK: drawer
+  ;; instead of entering them at point. This is useful for separating updates
+  ;; and logical content of a node.
+  ;;
+  ;; https://scripter.co/using-org-logbook-notes-to-record-blog-post-updates/
+  (setq org-log-into-drawer t)
+
   (setq org-roam-directory "~/org/roam")
   (setq +org-capture-todo-file "agenda/todo.org")
+
+  (defun ctr/org-table-yank-current-cell ()
+    (interactive)
+    (when (org-at-table-p)
+      (kill-new
+       (string-trim
+        (substring-no-properties (org-table-get-field))))))
+
+  (defun ctr/org-table-kill-current-cell ()
+    (interactive)
+    (when (org-at-table-p)
+      (ctr/org-table-yank-current-cell)
+      (org-table-blank-field)))
+
+  (map! :map org-mode-map
+        :leader
+        :prefix "m b"
+        "y" #'ctr/org-table-yank-current-cell
+        "Y" #'ctr/org-table-kill-current-cell)
 
   ;; This piece of code customizes the display of org-agenda items to display
   ;; the TODO of an item before the breadcrumbs instead of between the
@@ -51,7 +79,7 @@
   ;;
   ;; Sourced from:
   ;; https://list.orgmode.org/CAGEgU=hGnXj7TSGV6pvdSeWFWP_iVwe8WRu+uh8Hjh_7NNRKLw@mail.gmail.com/T/
-  (lambda ()
+  (defun ctr/org-agenda-breadcrumb-setup ()
 
     (defvar org-agenda-breadcrumbs-level 1
       "Highest level subtree to include in Org agenda breadcrumb.")
@@ -117,7 +145,6 @@ Using this in org-agenda-prefix-format you can get this:
 
   Category:          Scheduled:  TODO With a keyword
   Category:          Scheduled:       Without a keyword
-
 "
 
     (if (org-entry-get (point) "TODO") "" (s-repeat 5 " ")))
@@ -126,21 +153,16 @@ Using this in org-agenda-prefix-format you can get this:
   (setq org-agenda-breadcrumbs-separator "/")
   (setq org-agenda-category-width 16) ; custom
   (setq org-agenda-files `(,(concat org-directory "/agenda") ,org-roam-directory))
-  (setq org-agenda-span 45)
-  (setq org-agenda-start-on-weekday 1)
-
-  ;; Defaults
-  ;; (setq org-agenda-prefix-format
-  ;;       '((agenda . " %i %-12:c%?-12t% s")
-  ;;         (todo   . " %i %-12:c")
-  ;;         (tags   . " %i %-12:c")
-  ;;         (search . " %i %-12:c")))
-
   (setq org-agenda-prefix-format
         '((agenda . " %i %(ctr/org-agenda-category)%?-12t %s %(ctr/org-agenda-todo-padding)")
           (todo   . " %i %(ctr/org-agenda-category)")
           (tags   . " %i %(ctr/org-agenda-category)")
           (search . " %i %(ctr/org-agenda-category)")))
+  (setq org-agenda-span 45)
+  (setq org-agenda-start-day "-1d")
+  (setq org-agenda-start-on-weekday nil)
+  (ctr/org-agenda-breadcrumb-setup)
+  (org-roam-db-autosync-mode)
 
   ) ; org / org-roam
 
