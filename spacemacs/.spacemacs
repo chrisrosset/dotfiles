@@ -36,18 +36,24 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     ;; auto-completion
-     ;; better-defaults
+     auto-completion
+     better-defaults
+     common-lisp
      csv
      emacs-lisp
      finance
      git
-     graphviz
+     (graphviz :variables
+      ;; https://github.com/luxbock/graphviz/issues/1
+      default-tab-width 4)
      haskell
      helm
      html
      javascript
      markdown
+     (plantuml :variables
+               plantuml-default-exec-mode 'executable
+               org-plantuml-exec-mode 'plantuml)
      (org :variables
           ;; https://emacs.stackexchange.com/questions/12517/how-do-i-make-the-timespan-shown-by-org-agenda-start-yesterday
           org-agenda-start-on-weekday nil
@@ -61,12 +67,14 @@ values."
      python
      racket
      (shell :variables
+            ;shell-default-shell 'vterm
             shell-default-height 30
             shell-default-position 'bottom)
-     ;; spell-checking
+     spell-checking
      ;; syntax-checking
      typescript
-     version-control
+     unicode-fonts
+     ;; version-control
      yaml
      )
    ;; List of additional packages that will be installed without being
@@ -75,12 +83,17 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages
    '(
+     direnv
+     gnu-apl-mode
+     j-mode
+     jinja2-mode
      monokai-theme
      nix-mode
+     olivetti
      scad-mode
      )
    ;; A list of packages that cannot be updated.
-   dotspacemacs-frozen-packages '()
+   dotspacemacs-frozen-packages '(forge plantuml-mode vterm)
    ;; A list of packages that will not be installed and loaded.
    dotspacemacs-excluded-packages '()
    ;; Defines the behaviour of Spacemacs when installing packages.
@@ -134,7 +147,7 @@ values."
    ;; directory. A string value must be a path to an image format supported
    ;; by your Emacs build.
    ;; If the value is nil then no banner is displayed. (default 'official)
-   dotspacemacs-startup-banner 'official
+   dotspacemacs-startup-banner nil
    ;; List of items to show in startup buffer or an association list of
    ;; the form `(list-type . list-size)`. If nil then it is disabled.
    ;; Possible values for list-type are:
@@ -158,7 +171,7 @@ values."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Inconsolata"
-                               :size 20
+                               :size 18
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -299,6 +312,9 @@ values."
    ;; `current', `all' or `nil'. Default is `all' (highlight any scope and
    ;; emphasis the current one). (default 'all)
    dotspacemacs-highlight-delimiters 'all
+   ;; If non-nil, start an Emacs server if one is not already running.
+   ;; (default nil)
+   dotspacemacs-enable-server nil
    ;; If non nil, advise quit functions to keep server open when quitting.
    ;; (default nil)
    dotspacemacs-persistent-server nil
@@ -335,18 +351,83 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
+  ;; TODO: broken when using tramp
+  ;; (global-git-gutter+-mode 0)
+
+  (setq vc-follow-symlinks nil)
+
   ;; https://github.com/NixOS/nix/issues/828
   (setq spacemacs-indent-sensitive-modes (add-to-list 'spacemacs-indent-sensitive-modes 'nix-mode))
 
   ;; https://github.com/syl20bnr/spacemacs/issues/10064
   (spacemacs/toggle-highlight-current-line-globally-off)
 
-  ;; https://github.com/luxbock/graphviz/issues/1
-  (setq default-tab-width 4)
+  ;(add-to-list 'evil-emacs-state-modes 'vterm-mode)
 
-  (add-hook 'org-mode-hook (lambda ()
-                             "Enable spell-checking in Org buffers."
-                             (flyspell-mode t)))
+  ;; https://github.com/akermu/emacs-libvterm/issues/247
+  (setq evil-escape-excluded-major-modes '(vterm-mode))
+
+  (use-package gnu-apl-mode
+    :config
+    (setq gnu-apl-show-keymap-on-startup nil)
+    (defun em-gnu-apl-init ()
+      (setq buffer-face-mode-face '(:family "FreeMono" :height 120))
+      (buffer-face-mode))
+
+    (add-hook 'gnu-apl-keymap-mode-hook 'em-gnu-apl-init)
+    (add-hook 'gnu-apl-interactive-mode-hook 'em-gnu-apl-init)
+    (add-hook 'gnu-apl-mode-hook 'em-gnu-apl-init))
+
+  (use-package j-mode
+    :config
+    (setq j-console-cmd "jconsole")
+    (custom-set-faces
+     '(j-verb-face ((t (:foreground "Red"))))
+     '(j-adverb-face ((t (:foreground "Green"))))
+     '(j-conjunction-face ((t (:foreground "Cyan"))))
+     '(j-other-face ((t (:foreground "Yellow")))))
+    (add-hook 'j-mode-hook (lambda ()
+                             (smartparens-mode 0))))
+
+  (use-package org
+    :config
+    (add-hook 'org-mode-hook (lambda ()
+                               "Enable spell-checking in Org buffers."
+                               (flyspell-mode t)))
+
+    (org-babel-do-load-languages 'org-babel-load-languages
+                                 (append org-babel-load-languages
+                                         '((dot .t)
+                                           (python . t)
+                                           (plantuml . t))))
+
+    (defun my-org-confirm-babel-evaluate (lang body)
+      (not (member lang '("dot" "emacs-lisp" "j" "python" "plantuml"))))
+
+    (set-face-attribute 'org-headline-done nil
+                        :inherit 'fixed-pitch
+                        :foreground "gray"
+                        :strike-through nil)
+
+    (setq org-todo-keywords
+          '((sequence "TODO(t)" ; Work not started
+                      "WAIT(w)" ; Work blocked
+                      "PROG(p)" ; Work in progress
+                      "|"
+                      "DONE(d)"
+                      "DEAD(x)")))
+    (setq org-agenda-breadcrumbs-separator "/")
+    (setq org-agenda-prefix-format '((agenda . " %i %-12:c%?-12t% s")
+                                     (todo   . " %i %-12:c %b")
+                                     (tags   . " %i %-12:c")
+                                     (search . " %i %-12:c")))
+
+    (setq org-todo-keyword-faces '(("WAIT" . "yellow")
+                                   ("PROD" . "blue")
+                                   ("DEAD" . "gray")))
+
+    (setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
+    (setq org-agenda-files '("~/syncthing/default/org")))
 
   )
 
