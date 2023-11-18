@@ -138,8 +138,8 @@ contains the heading text to be modified."
 
   (defun ctr/org-agenda-todo-padding ()
     "If an item doesn't have a TODO keyword, return space padding for
-I am typing some more now visual alignment. Our org keywords are
-all 4 characters wide by convention.
+visual alignment. My org state keywords are all 4 characters wide
+by convention.
 
 Using this in org-agenda-prefix-format you can get this:
 
@@ -198,5 +198,22 @@ Using this in org-agenda-prefix-format you can get this:
         ("Asia/Singapore" "Singapore")
         ("Asia/Tokyo" "Tokyo")))
 
+;; https://discourse.doomemacs.org/t/how-to-re-bind-keys/56
+;; https://rameezkhan.me/posts/2020/2020-07-03--adding-keybindings-to-doom-emacs/
+
 (map! "C-x /" #'comment-or-uncomment-region)
 (map! :n "g s l" #'evil-avy-goto-line)
+
+;; Doom binds `g =' instead of `g +' in normal mode. I think this is because =
+;; is the same key as + but doesn't require holding shift. However, + is easier
+;; to remember and easier to access on a virtual keyboard. So let's have both.
+;;
+;; https://docs.doomemacs.org/latest/modules/editor/evil/#/configuration/increment-decrement-number-at-point
+;; https://github.com/doomemacs/doomemacs/blob/986398504d09e585c7d1a8d73a6394024fe6f164/modules/editor/evil/config.el#L475
+(map! :n "g +" #'evil-numbers/inc-at-pt)
+
+(after! org
+  (map! :map org-mode-map
+        :leader
+        (:prefix ("m z" . "custom")
+                 "n" #'org-add-note)))
