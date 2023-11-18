@@ -67,7 +67,7 @@ fi
 #[ -n "$EDITOR" ] || export EDITOR="vim"
 
 if CommandAvailable emacsclient; then
-    export EDITOR=emacsclient -nw -a vi
+    export EDITOR="emacsclient -nw -a vi"
 else
     export EDITOR=vi
 fi
