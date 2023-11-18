@@ -198,6 +198,9 @@ Using this in org-agenda-prefix-format you can get this:
         ("Asia/Singapore" "Singapore")
         ("Asia/Tokyo" "Tokyo")))
 
+;; Makes URLs open in the browser app when in Termux.
+(setq browse-url-browser-function 'browse-url-xdg-open)
+
 ;; https://discourse.doomemacs.org/t/how-to-re-bind-keys/56
 ;; https://rameezkhan.me/posts/2020/2020-07-03--adding-keybindings-to-doom-emacs/
 
