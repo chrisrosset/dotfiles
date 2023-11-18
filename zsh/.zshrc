@@ -274,4 +274,9 @@ zstyle ':completion:*:*:*:users' ignored-patterns \
 
 # }}}
 
+
+if CommandAvailable direnv; then
+    eval "$(direnv hook zsh)"
+fi
+
 # vim: set foldmethod=marker:
