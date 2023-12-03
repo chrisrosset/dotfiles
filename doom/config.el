@@ -169,7 +169,7 @@ Using this in org-agenda-prefix-format you can get this:
 
   ) ; org / org-roam
 
-(when ctr/termux?
+(when (ctr/termux?)
   (use-package! alert
     :config
     (setq alert-default-style 'termux)))
