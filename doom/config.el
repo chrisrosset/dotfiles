@@ -3,6 +3,9 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
+(defun ctr/termux? ()
+  "Predicate function for checking if we are in a termux environment."
+  (if (executable-find "termux-setup-storage") t nil))
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
@@ -166,6 +169,12 @@ Using this in org-agenda-prefix-format you can get this:
 
   ) ; org / org-roam
 
+(when ctr/termux?
+  (use-package! alert
+    :config
+    (setq alert-default-style 'termux)))
+
+
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
@@ -198,8 +207,9 @@ Using this in org-agenda-prefix-format you can get this:
         ("Asia/Singapore" "Singapore")
         ("Asia/Tokyo" "Tokyo")))
 
-;; Makes URLs open in the browser app when in Termux.
-(setq browse-url-browser-function 'browse-url-xdg-open)
+(when (ctr/termux?)
+  ;; Makes URLs open in the browser app.
+  (setq browse-url-browser-function 'browse-url-xdg-open))
 
 ;; https://discourse.doomemacs.org/t/how-to-re-bind-keys/56
 ;; https://rameezkhan.me/posts/2020/2020-07-03--adding-keybindings-to-doom-emacs/

@@ -56,3 +56,6 @@
   (package! nginx-mode)
   (package! prism)
   (package! prettier))
+
+(when (executable-find "termux-notification")
+  (package! alert-termux))
