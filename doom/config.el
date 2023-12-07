@@ -157,7 +157,7 @@ Using this in org-agenda-prefix-format you can get this:
   (setq org-agenda-category-width 16) ; custom
   (setq org-agenda-files `(,(concat org-directory "/agenda") ,org-roam-directory))
   (setq org-agenda-prefix-format
-        '((agenda . " %i %(ctr/org-agenda-category)%?-12t %s %(ctr/org-agenda-todo-padding)")
+        '((agenda . " %i %(ctr/org-agenda-category) %-12s %(ctr/org-agenda-todo-padding)")
           (todo   . " %i %(ctr/org-agenda-category)")
           (tags   . " %i %(ctr/org-agenda-category)")
           (search . " %i %(ctr/org-agenda-category)")))
