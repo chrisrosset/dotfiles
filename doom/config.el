@@ -30,6 +30,12 @@
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-one)
 
+(use-package! alert
+  :config
+  (when (ctr/termux?)
+    (setq alert-termux-command "~/bin/async-notify")
+    (setq alert-default-style 'termux)))
+
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (use-package! org

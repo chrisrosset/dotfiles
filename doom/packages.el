@@ -49,13 +49,13 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 
-(when (equal (system-name) "lemur")
+(package! alert
+  :recipe (:host github :repo "chrisrosset/alert" :branch "termux-id-support"))
+
+(when (string= (system-name) "lemur")
   (package! direnv)
   (package! emacsql-sqlite :built-in 'prefer)
   (package! mermaid-mode)
   (package! nginx-mode)
   (package! prism)
   (package! prettier))
-
-(when (executable-find "termux-notification")
-  (package! alert-termux))
