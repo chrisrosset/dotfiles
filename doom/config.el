@@ -3,9 +3,10 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
+(setq in-termux (if (executable-find "termux-setup-storage") t nil))
+
 (defun ctr/termux? ()
-  "Predicate function for checking if we are in a termux environment."
-  (if (executable-find "termux-setup-storage") t nil))
+  in-termux)
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
@@ -32,7 +33,7 @@
 
 (use-package! alert
   :config
-  (when (ctr/termux?)
+  (when in-termux
     (setq alert-termux-command "~/bin/async-notify")
     (setq alert-default-style 'termux)))
 
@@ -169,18 +170,48 @@ Using this in org-agenda-prefix-format you can get this:
   (setq org-agenda-breadcrumbs-separator "/")
   (setq org-agenda-category-width 16) ; custom
   (setq org-agenda-files `(,(concat org-directory "/agenda") ,org-roam-directory))
-  (setq org-agenda-prefix-format
+  (setq org-agenda-prefix-format-default
         '((agenda . " %i %(ctr/org-agenda-category) %-12s %(ctr/org-agenda-todo-padding)")
           (todo   . " %i %(ctr/org-agenda-category)")
           (tags   . " %i %(ctr/org-agenda-category)")
           (search . " %i %(ctr/org-agenda-category)")))
+  (setq org-agenda-prefix-format-narrow
+        '((agenda . " %i %(ctr/org-agenda-todo-padding)")
+          (todo   . " %i ")
+          (tags   . " %i ")
+          (search . " %i ")))
+
+  (setq org-agenda-prefix-format org-agenda-prefix-format-default)
   (setq org-agenda-span 45)
   (setq org-agenda-start-day "-1d")
   (setq org-agenda-start-on-weekday nil)
   (ctr/org-agenda-breadcrumb-setup)
+
+
   (org-roam-db-autosync-mode)
+  (setq org-roam-node-display-template-default org-roam-node-display-template)
+  (setq org-roam-node-display-template-narrow #("${doom-hierarchy:*}"))
+
+  (defun symbol-suffix (sym str)
+    "Given a symbol and a string suffix, return the symbol whose name
+matches the original name, hyphen, suffix."
+    (intern (format "%s-%s" (symbol-name sym) str)))
+
+  (defmacro adjust-for-width (sym)
+    `(set ,sym (if (< (frame-width) 60)
+                   (symbol-suffix ,sym "narrow")
+                 (symbol-suffix ,sym "default"))))
+
+  (defun adjust-for-display-width ()
+    "Adjust some settings to optimize display for a narrow display."
+    (adjust-for-width 'org-agenda-prefix-format)
+    (adjust-for-width 'org-roam-node-display-template))
+
+  (add-hook 'window-configuration-change-hook #'adjust-for-display-width)
+
 
   ) ; org / org-roam
+
 
 (when (ctr/termux?)
   (use-package! alert
