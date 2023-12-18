@@ -57,6 +57,13 @@
   (setq org-roam-directory "~/org/roam")
   (setq +org-capture-todo-file "agenda/todo.org")
 
+  (let ((mytemps '(("t" "Personal todo" entry
+                    (file+headline +org-capture-todo-file "Inbox")
+                    "* TODO %?\n%i\n%T"))))
+    (dolist (current mytemps)
+      (cl-delete-if (lambda (template) (equal (car template) (car current))) org-capture-templates)
+      (push current org-capture-templates)))
+
   (defun ctr/org-table-yank-current-cell ()
     (interactive)
     (when (org-at-table-p)

@@ -50,6 +50,7 @@
 ;(unpin! t)
 
 (package! alert
+  ;; https://github.com/jwiegley/alert/pull/110
   :recipe (:host github :repo "chrisrosset/alert" :branch "termux-id-support"))
 
 (when (string= (system-name) "lemur")
