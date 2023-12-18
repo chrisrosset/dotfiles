@@ -27,6 +27,10 @@ CommandAvailable()
 PrefixPATH "${HOME}/bin"
 PrefixPATH "${HOME}/arch/`uname -s`/bin"
 
+# Doom Emacs
+PrefixPATH "${HOME}/.config/emacs/bin"
+PrefixPATH "${HOME}/.emacs.d/bin"
+
 # }}}
 # {{{ Aliases
 

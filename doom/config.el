@@ -3,10 +3,11 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
-(setq in-termux (if (executable-find "termux-setup-storage") t nil))
+(use-package! s)
 
-(defun ctr/termux? ()
-  in-termux)
+(let ((in-termux (if (executable-find "termux-setup-storage") t nil)))
+  (defun ctr/termux? ()
+    in-termux))
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
@@ -274,3 +275,54 @@ matches the original name, hyphen, suffix."
         :leader
         (:prefix ("m z" . "custom")
                  "n" #'org-add-note)))
+
+(defun alist-s-get (key alist &optional default remove)
+  "Like alist-get but specifically for alists with string keys."
+  (alist-get key alist default remove #'string=))
+
+(defun extract-date (timestamp)
+  "Given a decoded-time timestamp, extract the date elements to return
+(list YEAR MONTH DAY)."
+  (reverse (cl-subseq timestamp 3 6)))
+
+(defun is-timestamp-today (timestamp)
+  "Check if an Org mode TIMESTAMP is for today."
+  (version-list-<= (extract-date (org-parse-time-string timestamp))
+                   (extract-date (decode-time (current-time)))))
+
+(defun org-get-outline-string (&optional with-self use-cache)
+  "Like `org-get-outline-path' but joins the path into a string using
+the org-agenda breadcrumb separator."
+  (s-join org-agenda-breadcrumbs-separator
+          (org-get-outline-path with-self use-cache)))
+
+(defun process-notification-candidate ()
+  "Inspect the current org entry to determine whether it's eligible for
+a notification. Returns an alist with data for the notification if it is
+or nil if it is not."
+  (let* ((data (org-entry-properties))
+         (todo (alist-s-get "TODO" data))
+         (test (or (assoc "SCHEDULED" data) (assoc "DEADLINE" data)))
+         (type (car test))
+         (date (cdr test)))
+
+    (when (and date
+               (is-timestamp-today date)
+               (not (member todo org-done-keywords-for-agenda)))
+
+      `((file . ,(org-get-title))
+        (type . ,type)
+        (item . ,(org-get-outline-string 'with-self))))))
+
+(defun get-agenda-notification-items ()
+  (delq nil (org-map-entries #'process-notification-candidate nil 'agenda)))
+
+(defun raise-agenda-notifications ()
+  (interactive)
+  (dolist (org-item (get-agenda-notification-items))
+    (alert (concat (alist-get 'item org-item)
+                   " ("
+                   (capitalize (alist-get 'type org-item))
+                   ")")
+           :id (secure-hash 'md5 (prin1-to-string org-item))
+           :title (alist-get 'file org-item))))
