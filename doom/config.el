@@ -34,7 +34,7 @@
 
 (use-package! alert
   :config
-  (when in-termux
+  (when (ctr/termux?)
     (setq alert-termux-command "~/bin/async-notify")
     (setq alert-default-style 'termux)))
 
@@ -186,6 +186,7 @@ Using this in org-agenda-prefix-format you can get this:
   (setq org-agenda-span 45)
   (setq org-agenda-start-day "-1d")
   (setq org-agenda-start-on-weekday nil)
+  (setq org-agenda-use-time-grid nil)
   (ctr/org-agenda-breadcrumb-setup)
 
 
@@ -199,9 +200,7 @@ matches the original name, hyphen, suffix."
     (intern (format "%s-%s" (symbol-name sym) str)))
 
   (defmacro adjust-for-width (sym)
-    `(set ,sym (if (< (frame-width) 60)
-                   (symbol-suffix ,sym "narrow")
-                 (symbol-suffix ,sym "default"))))
+    `(set ,sym (symbol-value (symbol-suffix ,sym (if (< (frame-width) 60) "narrow" "default")))))
 
   (defun adjust-for-display-width ()
     "Adjust some settings to optimize display for a narrow display."
