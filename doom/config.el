@@ -5,6 +5,10 @@
 
 (use-package! s)
 
+(let ((in-nixos (file-directory-p "/etc/nixos")))
+  (defun ctr/nixos? ()
+    in-nixos))
+
 (let ((in-termux (if (executable-find "termux-setup-storage") t nil)))
   (defun ctr/termux? ()
     in-termux))
@@ -55,6 +59,13 @@
   ;;
   ;; https://scripter.co/using-org-logbook-notes-to-record-blog-post-updates/
   (setq org-log-into-drawer t)
+
+  ;; HACK:
+  ;; I'm not sure why but Emacs doesn't respect the default applications. This
+  ;; might have something to do with it unable to find the .desktop files
+  ;; (located in "/run/current-system/sw/share/applications").
+  (when (ctr/nixos?)
+    (push '("pdf" . "xdg-open %s") org-file-apps))
 
   (setq org-roam-directory "~/org/roam")
   (setq +org-capture-todo-file "agenda/todo.org")
