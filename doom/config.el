@@ -68,14 +68,26 @@
     (push '("pdf" . "xdg-open %s") org-file-apps))
 
   (setq org-roam-directory "~/org/roam")
-  (setq +org-capture-todo-file "agenda/todo.org")
+  (setq +org-capture-todo-file "agenda/inbox.org")
 
-  (let ((mytemps '(("t" "Personal todo" entry
-                    (file+headline +org-capture-todo-file "Inbox")
-                    "* TODO %?\n%i\n%T"))))
-    (dolist (current mytemps)
-      (cl-delete-if (lambda (template) (equal (car template) (car current))) org-capture-templates)
-      (push current org-capture-templates)))
+  (setq org-capture-templates
+        '(("t" "Personal todo" entry
+           (file +org-capture-todo-file)
+           "
+* TODO %?
+:PROPERTIES:
+:CREATED: %U
+:END:
+%i")
+          ("s" "Shopping item" entry
+           (file "agenda/shopping.org")
+           "
+* %?
+:PROPERTIES:
+:CREATED: %U
+:END:
+%i")))
+
 
   (defun ctr/org-table-yank-current-cell ()
     (interactive)
