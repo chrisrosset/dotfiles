@@ -292,6 +292,13 @@ matches the original name, hyphen, suffix."
 ;; https://github.com/doomemacs/doomemacs/blob/986398504d09e585c7d1a8d73a6394024fe6f164/modules/editor/evil/config.el#L475
 (map! :n "g +" #'evil-numbers/inc-at-pt)
 
+(map! :leader
+      :desc "Save all open buffers"
+      "f a"
+      (lambda ()
+        (interactive)
+        (save-some-buffers t)))
+
 (after! org
   (map! :map org-mode-map
         :leader
