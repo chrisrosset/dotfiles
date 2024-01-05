@@ -46,9 +46,10 @@
 ;; change `org-directory'. It must be set before org loads!
 (use-package! org
   :init
+  (setq org-directory "~/org")
+  (setq org-roam-directory "~/org/roam")
 
   :config
-  (setq org-directory "~/org")
   (setq org-ellipses "…")
   (setq org-log-done "time")
   (setq org-log-done-with-time t)
@@ -67,7 +68,6 @@
   (when (ctr/nixos?)
     (push '("pdf" . "xdg-open %s") org-file-apps))
 
-  (setq org-roam-directory "~/org/roam")
   (setq +org-capture-todo-file "agenda/inbox.org")
 
   (setq org-capture-templates
@@ -212,8 +212,6 @@ Using this in org-agenda-prefix-format you can get this:
   (setq org-agenda-use-time-grid nil)
   (ctr/org-agenda-breadcrumb-setup)
 
-
-  (org-roam-db-autosync-mode)
   (setq org-roam-node-display-template-default org-roam-node-display-template)
   (setq org-roam-node-display-template-narrow #("${doom-hierarchy:*}"))
 
@@ -233,7 +231,13 @@ matches the original name, hyphen, suffix."
   (add-hook 'window-configuration-change-hook #'adjust-for-display-width)
 
 
-  ) ; org / org-roam
+  ) ; org
+
+(use-package! org-roam
+  :config
+  (when (>= emacs-major-version 29)
+    (setq org-roam-database-connector 'sqlite-builtin))
+  (org-roam-db-autosync-mode))
 
 
 (when (ctr/termux?)
