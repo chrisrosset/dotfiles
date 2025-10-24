@@ -152,7 +152,7 @@ contains the heading text to be modified."
         (let* ((txt (org-get-heading t t t t))
                (index (or (cl-search txt (cadr args)) 0))
                (bc (let ((s (org-agenda-breadcrumbs-string)))
-                     (if (eq "" s)
+                     (if (string= "" s)
                          ""
                        (concat s org-agenda-breadcrumbs-separator)))))
           (setf (substring (cadr args) index index) bc)
@@ -301,7 +301,8 @@ matches the original name, hyphen, suffix."
       "f a"
       (lambda ()
         (interactive)
-        (save-some-buffers t)))
+        (save-some-buffers t)
+        (message "Saved stuff!")))
 
 (after! org
   (map! :map org-mode-map
