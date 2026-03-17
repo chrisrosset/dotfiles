@@ -47,6 +47,7 @@
 (use-package! org
   :init
   (setq org-directory "~/org")
+  (setq org-archive-location (concat org-directory "/archive/" "%s_archive" "::"))
   (setq org-roam-directory "~/org/roam")
 
   :config
