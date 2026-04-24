@@ -5,6 +5,11 @@
 
 (use-package! s)
 
+;; HACK: These are common locations where I have the repo checked out.
+(add-to-list 'load-path "~/dotfiles/emacs-lisp")
+(add-to-list 'load-path "~/.dotfiles/emacs-lisp")
+(add-to-list 'load-path "~/projects/dotfiles/emacs-lisp")
+
 (let ((in-nixos (file-directory-p "/etc/nixos")))
   (defun ctr/nixos? ()
     in-nixos))
@@ -51,6 +56,7 @@
   (setq org-roam-directory "~/org/roam")
 
   :config
+  (require 'ctr)
   (setq org-ellipses "…")
   (setq org-log-done "time")
   (setq org-log-done-with-time t)
